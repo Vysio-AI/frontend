@@ -3,10 +3,11 @@ name: Deploy
 on:
   push:
     branches:
-     - main
-     - development
+      - main
+      - development
   pull_request:
-   - development
+    branches:
+      - development
 
 env:
   REGISTRY: ghcr.io
