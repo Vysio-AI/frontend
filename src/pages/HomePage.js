@@ -14,6 +14,7 @@ import {
 import { SearchIcon } from '@heroicons/react/solid'
 import CalendarHeatmap from 'react-calendar-heatmap';
 import 'react-calendar-heatmap/dist/styles.css';
+import SocketComponent from '../components/SocketComponent';
 
 const sidebarNavigation = [
   { name: 'Home', href: '#', icon: HomeIcon, current: false },
@@ -269,6 +270,7 @@ export default function Example() {
                   ]}
                 />
               </div>
+              <SocketComponent />
             </section>
           </main>
 
