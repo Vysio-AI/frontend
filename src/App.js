@@ -15,6 +15,7 @@ import LandingPage from './pages/public/LandingPage';
 import HomePage from './pages/dashboard/HomePage';
 import ProfilePage from './pages/dashboard/ProfilePage';
 import PatientsPage from './pages/dashboard/PatientsPage';
+import NotFound from './pages/errors/NotFound';
 
 function App() {
 
@@ -42,6 +43,7 @@ function App() {
           <Route exact path="/dashboard/patients" component={PatientsPage}></Route>
         </DashboardLayout>
       </Route>
+      <Route exact component={NotFound}></Route>
     </Switch>
   );
 }
