@@ -15,13 +15,14 @@ export default function PublicLayout({ children }) {
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Top">
           <div className="w-full py-6 flex items-center justify-between border-b border-indigo-500 lg:border-none">
             <div className="flex items-center">
-              <a href="#">
-                <span className="sr-only">Workflow</span>
+              <a href="#" className="flex items-center">
+                <span className="sr-only">Vysio</span>
                 <img
                   className="h-10 w-auto"
                   src="https://tailwindui.com/img/logos/workflow-mark.svg?color=white"
                   alt=""
                 />
+                <h1 className="text-2xl font-semibold text-white ml-2">Vysio</h1>
               </a>
               <div className="hidden ml-10 space-x-8 lg:block">
                 {navigation.map((link) => (
@@ -31,7 +32,7 @@ export default function PublicLayout({ children }) {
                 ))}
               </div>
             </div>
-            <div className="ml-10 space-x-4">
+            <div className="ml-2 sm:ml-10 space-x-4">
               <Link
                 to="/dashboard"
                 className="inline-block bg-indigo-500 py-2 px-4 border border-transparent rounded-md text-base font-medium text-white hover:bg-opacity-75"

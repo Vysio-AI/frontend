@@ -1,12 +1,12 @@
 import React from 'react';
 import CalendarHeatmap from 'react-calendar-heatmap';
-import 'react-calendar-heatmap/dist/styles.css';
 
 export default function ActivityHeatMap() {
 
   return (
-    <div className="flex flex-row items-center justify-center max-w-md">
+    <div className="flex flex-row items-center justify-center">
       <CalendarHeatmap
+        className="text-sm"
         startDate={new Date('2016-01-01')}
         endDate={new Date('2016-04-01')}
         values={[

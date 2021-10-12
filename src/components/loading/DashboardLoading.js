@@ -83,10 +83,10 @@ function DashboardLayout({ navLength }) {
                         'group flex items-center text-sm font-medium rounded-md'
                       )}
                     >
-                      <div className="animate-pulse w-full h-full py-1 flex space-between items-center border-2 rounded-md bg-gray-200">
-                        <div className="animate-pulse w-7 h-6 m-1 rounded-md bg-gray-100">
+                      <div className="animate-pulse w-full h-full py-1 flex space-between items-center border-2 rounded-md bg-gray-100">
+                        <div className="animate-pulse w-7 h-6 m-1 rounded-md bg-gray-200">
                         </div>
-                        <div className="animate-pulse w-full h-6 ml-2 mr-1 rounded-md bg-gray-100">
+                        <div className="animate-pulse w-full h-6 mx-2 rounded-md bg-gray-200">
                         </div>
                       </div>
                     </div>
@@ -97,7 +97,7 @@ function DashboardLayout({ navLength }) {
                 <div className="flex-shrink-0 group block">
                   <div className="flex items-center">
                     <div className="flex items-center h-full">
-                      <div className="animate-pulse w-12 h-12 border-2 rounded-md bg-gray-300">
+                      <div className="animate-pulse w-12 h-12 rounded-md bg-gray-100">
                       </div>
                     </div>
                   </div>
@@ -131,10 +131,10 @@ function DashboardLayout({ navLength }) {
                       'group flex items-center text-sm font-medium rounded-md'
                     )}
                   >
-                    <div className="animate-pulse w-full h-full py-1 flex space-between items-center border-2 rounded-md bg-gray-200">
-                      <div className="animate-pulse w-7 h-6 m-1 rounded-md bg-gray-100">
+                    <div className="animate-pulse w-full h-full py-1 flex space-between items-center rounded-md bg-gray-100">
+                      <div className="animate-pulse w-7 h-6 m-1 rounded-md bg-gray-200">
                       </div>
-                      <div className="animate-pulse w-full h-6 ml-2 mr-1 rounded-md bg-gray-100">
+                      <div className="animate-pulse w-full h-6 mx-2 rounded-md bg-gray-200">
                       </div>
                     </div>
                   </div>
@@ -144,9 +144,9 @@ function DashboardLayout({ navLength }) {
             <div className="flex-shrink-0 flex border-t border-gray-200 p-4">
               <div href="#" className="flex-shrink-0 w-full group block">
                 <div className="flex items-center h-full">
-                  <div className="animate-pulse w-14 h-10 mt-1 border-2 rounded-full bg-gray-200">
+                  <div className="animate-pulse w-14 h-10 mt-1 rounded-full bg-gray-100">
                   </div>
-                  <div className="animate-pulse w-full h-10 mx-3 mt-1 border-2 rounded-md bg-gray-200">
+                  <div className="animate-pulse w-full h-10 mx-3 mt-1 rounded-md bg-gray-100">
                   </div>
                 </div>
               </div>
