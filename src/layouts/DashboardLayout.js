@@ -14,6 +14,7 @@ import {
 } from '@heroicons/react/outline'
 
 import { Link, useHistory } from 'react-router-dom';
+import { useQuery } from "react-query";
 
 import { useAuth0 } from "@auth0/auth0-react";
 import DashboardLoading from "../components/loading/DashboardLoading";
@@ -37,10 +38,18 @@ function DashboardLayout({ children }) {
   const { user, isAuthenticated, isLoading, loginWithRedirect } = useAuth0();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
+  // const { isLoading: isQueryLoading, isError, data, error } = useQuery('accountInfo', () => {
+  //   const data = await 
+  // });
+
   if (isLoading) {
     console.log("Navlength: " + navigation.length);
     return <DashboardLoading navLength={navigation.length} />
   }
+
+  // if (isError) {
+  //   return <span>Error: {error.message}</span>
+  // }
 
   if (!isAuthenticated) {
     loginWithRedirect({
@@ -218,7 +227,7 @@ function DashboardLayout({ children }) {
           </div>
         </div>
       </div>
-      <div className="flex flex-col w-0 flex-1 overflow-hidden">
+      <div className="flex flex-col w-0 flex-1 overflow-y-auto">
         <div className="md:hidden pl-1 pt-1 sm:pl-3 sm:pt-3">
           <button
             type="button"
@@ -229,7 +238,7 @@ function DashboardLayout({ children }) {
             <MenuIcon className="h-6 w-6" aria-hidden="true" />
           </button>
         </div>
-        <main className="flex-1 relative z-0 focus:outline-none overflow-y-auto">
+        <main className="flex-1 relative z-0 focus:outline-none">
           <div className="max-w-7xl px-4 sm:px-6 md:px-8 overflow-y-auto">
             {children}
           </div>

@@ -34,13 +34,19 @@ export default function PublicLayout({ children }) {
             </div>
             <div className="ml-2 sm:ml-10 space-x-4">
               <Link
-                to="/dashboard"
+                to={{
+                  pathname: "/dashboard",
+                  state: { type: "login" }
+                }}
                 className="inline-block bg-indigo-500 py-2 px-4 border border-transparent rounded-md text-base font-medium text-white hover:bg-opacity-75"
               >
                 Sign in
               </Link>
               <Link
-                to="/dashboard"
+                to={{
+                  pathname: "/dashboard",
+                  state: { type: "signup" }
+                }}
                 className="inline-block bg-white py-2 px-4 border border-transparent rounded-md text-base font-medium text-indigo-600 hover:bg-indigo-50"
               >
                 Sign up

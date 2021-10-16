@@ -14,7 +14,7 @@ export default function SocketComponent() {
     });
 
     socket.on("message", (msg) => {
-      setMessages(state => [...state, msg]);
+      setMessages(state => [...state, msg.message]);
     });
 
     return () => socket.emit('end');
