@@ -14,9 +14,7 @@ export default function HomePage() {
 
   return (
     <div className="h-full w-full">
-      <div className="max-w-lg max-h-lg">
-        <ActivityHeatMap />
-      </div>
+      <h1 className="text-2xl font-semibold">Sessions</h1>
       <SocketComponent />
     </div>
   )

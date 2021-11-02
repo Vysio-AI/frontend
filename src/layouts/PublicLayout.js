@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import logo from '../assets/vysio.png';
 
 const navigation = [
   { name: 'Solutions', href: '#' },
@@ -19,8 +20,8 @@ export default function PublicLayout({ children }) {
                 <span className="sr-only">Vysio</span>
                 <img
                   className="h-10 w-auto"
-                  src="https://tailwindui.com/img/logos/workflow-mark.svg?color=white"
-                  alt=""
+                  src={logo}
+                  alt="Vysio"
                 />
                 <h1 className="text-2xl font-semibold text-white ml-2">Vysio</h1>
               </a>
