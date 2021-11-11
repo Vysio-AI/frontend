@@ -23,7 +23,6 @@ export default function PublicLayout({ children }) {
                   src={logo}
                   alt="Vysio"
                 />
-                <h1 className="text-2xl font-semibold text-white ml-2">Vysio</h1>
               </a>
               <div className="hidden ml-10 space-x-8 lg:block">
                 {navigation.map((link) => (
