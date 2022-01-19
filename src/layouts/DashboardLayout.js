@@ -22,9 +22,10 @@ import LogoutButton from "../components/buttons/LogoutButton";
 import logo from '../assets/vysio.png';
 
 const navigation = [
-  { name: 'Home', href: '/dashboard', icon: HomeIcon },
+  { name: 'Dashboard', href: '/dashboard', icon: HomeIcon },
   { name: 'Patients', href: '/dashboard/patients', icon: UsersIcon },
-  { name: 'Profile', href: '/dashboard/profile', icon: UserCircleIcon },
+  { name: 'Plans', href: '/dashboard/plans', icon: FolderIcon },
+  { name: 'Sessions', href: '/dashboard/sessions', icon: CalendarIcon },
 ]
 
 function classNames(...classes) {
