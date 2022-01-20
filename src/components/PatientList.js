@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { ChevronLeftIcon, FilterIcon, MailIcon, PhoneIcon, SearchIcon } from '@heroicons/react/solid'
 
-export default function DirectoryList({ directory, setShowPatient }) {
+export default function PatientList({ directory, setShowPatient }) {
 
   return (
     <Fragment>

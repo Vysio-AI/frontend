@@ -1,6 +1,6 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import Loading from "../../components/loading/Loading";
-import DirectoryList from "../../components/DirectoryList";
+import PatientList from "../../components/PatientList";
 import PatientView from "../../components/PatientView";
 import { Fragment, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
@@ -247,14 +247,14 @@ export default function PatientsPage() {
         <div className="flex-1 relative z-0 flex overflow-hidden">
           {showDirectory &&
             <div className="xl:hidden order-first flex flex-col flex-shrink-0 w-96 border-r border-gray-200">
-              <DirectoryList directory={directory} setShowPatient={setShowPatient} />
+              <PatientList directory={directory} setShowPatient={setShowPatient} />
             </div>
           }
           {!showDirectory &&
             <PatientView patient={patient} setShowDirectory={setShowDirectory} />
           }
           <aside className="hidden xl:order-first xl:flex xl:flex-col flex-shrink-0 w-96 border-r border-gray-200">
-            <DirectoryList directory={directory} setShowPatient={setShowPatient} />
+            <PatientList directory={directory} setShowPatient={setShowPatient} />
           </aside>
         </div>
       </div>
