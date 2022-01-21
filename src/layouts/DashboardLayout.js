@@ -1,20 +1,16 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment, useEffect, useState } from 'react'
+import { Fragment, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import {
   CalendarIcon,
-  ChartBarIcon,
   FolderIcon,
   HomeIcon,
-  InboxIcon,
   MenuIcon,
   UsersIcon,
   XIcon,
-  UserCircleIcon,
 } from '@heroicons/react/outline'
 
-import { Link, useHistory } from 'react-router-dom';
-import { useQuery } from "react-query";
+import { Link } from 'react-router-dom';
 
 import { useAuth0 } from "@auth0/auth0-react";
 import DashboardLoading from "../components/loading/DashboardLoading";
@@ -22,9 +18,10 @@ import LogoutButton from "../components/buttons/LogoutButton";
 import logo from '../assets/vysio.png';
 
 const navigation = [
-  { name: 'Home', href: '/dashboard', icon: HomeIcon },
+  { name: 'Dashboard', href: '/dashboard', icon: HomeIcon },
   { name: 'Patients', href: '/dashboard/patients', icon: UsersIcon },
-  { name: 'Profile', href: '/dashboard/profile', icon: UserCircleIcon },
+  { name: 'Plans', href: '/dashboard/plans', icon: FolderIcon },
+  { name: 'Sessions', href: '/dashboard/sessions', icon: CalendarIcon },
 ]
 
 function classNames(...classes) {

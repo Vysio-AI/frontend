@@ -1,22 +1,9 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import Loading from "../../components/loading/Loading";
-import DirectoryList from "../../components/DirectoryList";
+import PatientList from "../../components/PatientList";
 import PatientView from "../../components/PatientView";
-import { Fragment, useState } from 'react'
-import { Dialog, Transition } from '@headlessui/react'
-import {
-  CalendarIcon,
-  CogIcon,
-  HomeIcon,
-  MapIcon,
-  MenuIcon,
-  SearchCircleIcon,
-  SpeakerphoneIcon,
-  UserGroupIcon,
-  ViewGridAddIcon,
-  XIcon,
-} from '@heroicons/react/outline'
-import { ChevronLeftIcon, FilterIcon, MailIcon, PhoneIcon, SearchIcon } from '@heroicons/react/solid'
+import PageHeading from "../../components/PageHeading";
+import { useState } from 'react'
 
 const directory = {
   A: [
@@ -223,10 +210,6 @@ const directory = {
   ],
 }
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
-}
-
 export default function PatientsPage() {
   const { isLoading } = useAuth0();
   const [showDirectory, setShowDirectory] = useState(true);
@@ -242,20 +225,23 @@ export default function PatientsPage() {
   }
 
   return (
-    <div className="relative h-screen flex overflow-hidden bg-white">
-      <div className="flex flex-col min-w-0 flex-1 overflow-hidden">
-        <div className="flex-1 relative z-0 flex overflow-hidden">
-          {showDirectory &&
-            <div className="xl:hidden order-first flex flex-col flex-shrink-0 w-96 border-r border-gray-200">
-              <DirectoryList directory={directory} setShowPatient={setShowPatient} />
-            </div>
-          }
-          {!showDirectory &&
-            <PatientView patient={patient} setShowDirectory={setShowDirectory} />
-          }
-          <aside className="hidden xl:order-first xl:flex xl:flex-col flex-shrink-0 w-96 border-r border-gray-200">
-            <DirectoryList directory={directory} setShowPatient={setShowPatient} />
-          </aside>
+    <div>
+      <PageHeading title="Patients"/>
+      <div className="relative h-screen flex overflow-hidden bg-white">
+        <div className="flex flex-col min-w-0 flex-1 overflow-hidden">
+          <div className="flex-1 relative z-0 flex overflow-hidden">
+            {showDirectory &&
+              <div className="xl:hidden order-first flex flex-col flex-shrink-0 w-96 border-r border-gray-200">
+                <PatientList directory={directory} setShowPatient={setShowPatient} />
+              </div>
+            }
+            {!showDirectory &&
+              <PatientView patient={patient} setShowDirectory={setShowDirectory} />
+            }
+            <aside className="hidden xl:order-first xl:flex xl:flex-col flex-shrink-0 w-96 border-r border-gray-200">
+              <PatientList directory={directory} setShowPatient={setShowPatient} />
+            </aside>
+          </div>
         </div>
       </div>
     </div>

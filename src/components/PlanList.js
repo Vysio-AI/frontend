@@ -1,13 +1,11 @@
 import React, { Fragment } from 'react';
-import { ChevronLeftIcon, FilterIcon, MailIcon, PhoneIcon, SearchIcon } from '@heroicons/react/solid'
+import { FilterIcon, SearchIcon } from '@heroicons/react/solid'
 
-export default function DirectoryList({ directory, setShowPatient }) {
+export default function PlanList({ directory, setShowPlan }) {
 
   return (
     <Fragment>
       <div className="px-6 pt-6 pb-4">
-        <h2 className="text-lg font-medium text-gray-900">Directory</h2>
-        <p className="mt-1 text-sm text-gray-600">Search directory of 3,018 employees</p>
         <form className="mt-6 flex space-x-4" action="#">
           <div className="flex-1 min-w-0">
             <label htmlFor="search" className="sr-only">
@@ -41,22 +39,21 @@ export default function DirectoryList({ directory, setShowPatient }) {
             <div className="z-10 sticky top-0 border-t border-b border-gray-200 bg-gray-50 px-6 py-1 text-sm font-medium text-gray-500">
               <h3>{letter}</h3>
             </div>
-            <ul role="list" className="relative z-0 divide-y divide-gray-200">
-              {directory[letter].map((patient) => (
-                <li key={patient.id}>
+            <ul className="relative z-0 divide-y divide-gray-200">
+              {directory[letter].map((plan) => (
+                <li key={plan.id}>
                   <div
                     className="relative px-6 py-5 flex items-center space-x-3 hover:bg-gray-50 focus-within:ring-2 focus-within:ring-inset focus-within:ring-pink-500"
-                    onClick={() => setShowPatient(patient)}
+                    onClick={() => setShowPlan(plan)}
                   >
-                    <div className="flex-shrink-0">
-                      <img className="h-10 w-10 rounded-full" src={patient.imageUrl} alt="" />
-                    </div>
                     <div className="flex-1 min-w-0">
                       <a href="#" className="focus:outline-none">
                         {/* Extend touch target to entire panel */}
                         <span className="absolute inset-0" aria-hidden="true" />
-                        <p className="text-sm font-medium text-gray-900">{patient.name}</p>
-                        <p className="text-sm text-gray-500 truncate">{patient.role}</p>
+                        <p className="text-sm font-medium text-gray-900">{plan.name}</p>
+                        <div class="flex -space-x-1 overflow-hidden">
+                          {plan.patients.map(_patient => <img class="inline-block h-6 w-6 rounded-full ring-2 ring-white" src={_patient.imgUrl} alt=""/>)}
+                        </div>
                       </a>
                     </div>
                   </div>

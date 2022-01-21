@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useQuery, useMutation, QueryClient } from 'react-query';
+import { useMutation, QueryClient } from 'react-query';
 import axios from 'axios';
 import { io } from 'socket.io-client';
 import SessionTimer from './SessionTimer';
 import { useStopwatch } from 'react-timer-hook';
-import Moment from 'react-moment';
 
 
 import ActivityVisualization from './ActivityVisualization';
