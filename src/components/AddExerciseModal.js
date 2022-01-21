@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react'
+import { Fragment, useRef, useState } from 'react'
 import { Dialog, Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, SelectorIcon } from '@heroicons/react/outline'
 
@@ -17,6 +17,8 @@ function classNames(...classes) {
 
 export default function AddExerciseModal({ open, setOpen }) {
   const [exerciseSelected, setExerciseSelected] = useState(exercises[1])
+
+  const cancelButtonRef = useRef(null)
 
   function submitAddExercise() {
     setOpen(false)
@@ -146,20 +148,21 @@ export default function AddExerciseModal({ open, setOpen }) {
                   </div>
                 </div>
               </div>
-              <div className="mt-5 sm:mt-6 justify-between">
+              <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
                 <button
                   type="button"
-                  className="inline-flex w-2/5 justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-gray-600 text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
-                  onClick={() => setOpen(false)}
+                  className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm"
+                  onClick={() => submitAddExercise()}
                 >
-                  Cancel
+                  Submit
                 </button>
                 <button
                   type="button"
-                  className="inline-flex w-2/5 justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
-                  onClick={() => submitAddExercise()}
+                  className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:w-auto sm:text-sm"
+                  onClick={() => setOpen(false)}
+                  ref={cancelButtonRef}
                 >
-                  Add
+                  Cancel
                 </button>
               </div>
             </div>
