@@ -5,10 +5,10 @@ import { PlusCircleIcon, PencilIcon, TrashIcon } from '@heroicons/react/solid'
 export default function PlanView({ plan, setShowDirectory }) {
 
   return (
-    <div className="bg-white shadow overflow-hidden sm:rounded-lg">
+    <div className="bg-white shadow overflow-hidden sm:rounded-lg min-w-full xl:pr-96">
       <div className="mt-6 sm:flex-1 sm:min-w-0 sm:flex sm:items-center sm:justify-end sm:space-x-6 sm:pb-1">
         <div className="sm:hidden 2xl:block mt-6 min-w-0 flex-1">
-          <h1 className="text-2xl font-bold text-gray-900 truncate">{plan.name}</h1>
+          <h1 className="text-2xl font-bold text-gray-900 truncate ml-4">{plan.name}</h1>
         </div>
         <div className="mt-6 flex flex-col justify-stretch space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4">
           <button
@@ -82,18 +82,14 @@ export default function PlanView({ plan, setShowDirectory }) {
           </div>
         </dl>
       </div>
-      <div className="flex">
-        <div className="flex">
-          <h3 className="text-lg font-medium text-gray-900">Exercises</h3>
-        </div>
-        <div className="flex">
-          <button
-            type="button"
-            className="inline-flex justify-center text-sm font-medium rounded-md bg-white"
-          >
-            <PlusCircleIcon className="-ml-1 mr-2 h-5 w-5 text-indigo-600 hover:text-indigo-500" aria-hidden="true" />
-          </button>
-        </div>
+      <div className="flex flex-row justify-between items-center px-2 py-2">
+        <h3 className="text-lg font-medium text-gray-900">Exercises</h3>
+        <button
+          type="button"
+          className="inline-flex justify-center text-sm font-medium rounded-md bg-white"
+        >
+          <PlusCircleIcon className="-ml-1 mr-2 h-5 w-5 text-indigo-600 hover:text-indigo-500" aria-hidden="true" />
+        </button>
       </div>
       <div className="flex flex-col">
         <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
