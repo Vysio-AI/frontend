@@ -108,23 +108,4 @@ export default function PlansPage() {
       </div>
     </div>
   )
-  // return (
-  //   <div className="relative h-screen flex overflow-hidden bg-white">
-  //     <div className="flex flex-col min-w-0 flex-1 overflow-hidden">
-  //       <div className="flex-1 relative z-0 flex overflow-hidden">
-  //         {showDirectory &&
-  //           <div className="xl:hidden order-first flex flex-col flex-shrink-0 w-96 border-r border-gray-200">
-  //             <PlanList directory={directory} setShowPlan={setShowPlan} />
-  //           </div>
-  //         }
-  //         {!showDirectory &&
-  //           <PlanView plan={plan} setShowDirectory={setShowDirectory} />
-  //         }
-  //         <aside className="hidden xl:order-first xl:flex xl:flex-col flex-shrink-0 w-96 border-r border-gray-200">
-  //           <PlanList directory={directory} setShowPlan={setShowPlan} />
-  //         </aside>
-  //       </div>
-  //     </div>
-  //   </div>
-  // )
 }
