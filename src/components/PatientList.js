@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { ChevronLeftIcon, FilterIcon, MailIcon, PhoneIcon, SearchIcon } from '@heroicons/react/solid'
+import { FilterIcon, SearchIcon } from '@heroicons/react/solid'
 
 export default function PatientList({ directory, setShowPatient }) {
 
@@ -41,7 +41,7 @@ export default function PatientList({ directory, setShowPatient }) {
             <div className="z-10 sticky top-0 border-t border-b border-gray-200 bg-gray-50 px-6 py-1 text-sm font-medium text-gray-500">
               <h3>{letter}</h3>
             </div>
-            <ul role="list" className="relative z-0 divide-y divide-gray-200">
+            <ul className="relative z-0 divide-y divide-gray-200">
               {directory[letter].map((patient) => (
                 <li key={patient.id}>
                   <div

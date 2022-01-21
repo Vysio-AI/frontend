@@ -2,7 +2,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import Loading from "../../components/loading/Loading";
 
 export default function ProfilePage() {
-  const { user, isAuthenticated, isLoading } = useAuth0();
+  const { isLoading } = useAuth0();
 
   if (isLoading) {
     return <Loading />

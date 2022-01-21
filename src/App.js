@@ -3,8 +3,6 @@ import {
   Switch,
   Route
 } from 'react-router-dom';
-import { useAuth0 } from "@auth0/auth0-react";
-import Loading from './components/loading/Loading';
 
 // Layout Imports
 import DashboardLayout from './layouts/DashboardLayout';

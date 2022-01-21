@@ -1,16 +1,6 @@
-import { Fragment, useEffect, useState } from 'react'
+import { Fragment, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-import {
-  CalendarIcon,
-  ChartBarIcon,
-  FolderIcon,
-  HomeIcon,
-  InboxIcon,
-  MenuIcon,
-  UsersIcon,
-  XIcon,
-  UserCircleIcon,
-} from '@heroicons/react/outline'
+import { MenuIcon, XIcon } from '@heroicons/react/outline'
 import logo from '../../assets/vysio.png';
 
 import Loading from "./Loading";
@@ -76,7 +66,7 @@ function DashboardLayout({ navLength }) {
                   />
                 </div>
                 <nav className="mt-5 flex-1 px-2 bg-white space-y-1">
-                  {[...Array(navLength)].map((e, i) => (
+                  {[...Array(navLength)].map((i) => (
                     <div
                       key={i}
                       className={classNames(
@@ -124,7 +114,7 @@ function DashboardLayout({ navLength }) {
                 />
               </div>
               <nav className="mt-5 flex-1 px-2 bg-white space-y-1">
-                {[...Array(navLength)].map((e, i) => (
+                {[...Array(navLength)].map((i) => (
                   <div
                     key={i}
                     className={classNames(

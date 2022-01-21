@@ -1,18 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { useAuth0 } from "@auth0/auth0-react";
-import {
-  CalendarIcon,
-  CogIcon,
-  HomeIcon,
-  MapIcon,
-  MenuIcon,
-  SearchCircleIcon,
-  SpeakerphoneIcon,
-  UserGroupIcon,
-  ViewGridAddIcon,
-  XIcon,
-} from '@heroicons/react/outline'
-import { ChevronLeftIcon, FilterIcon, MailIcon, PhoneIcon, SearchIcon } from '@heroicons/react/solid'
+import React from 'react';
+import { ChevronLeftIcon, MailIcon, PhoneIcon } from '@heroicons/react/solid'
 import ActivityHeatMap from './ActivityHeatMap';
 
 export default function PatientView({ patient, setShowDirectory }) {

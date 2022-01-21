@@ -1,20 +1,16 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment, useEffect, useState } from 'react'
+import { Fragment, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import {
   CalendarIcon,
-  ChartBarIcon,
   FolderIcon,
   HomeIcon,
-  InboxIcon,
   MenuIcon,
   UsersIcon,
   XIcon,
-  UserCircleIcon,
 } from '@heroicons/react/outline'
 
-import { Link, useHistory } from 'react-router-dom';
-import { useQuery } from "react-query";
+import { Link } from 'react-router-dom';
 
 import { useAuth0 } from "@auth0/auth0-react";
 import DashboardLoading from "../components/loading/DashboardLoading";

@@ -5,11 +5,6 @@ export default function SessionTimer({ timer }) {
     seconds,
     minutes,
     hours,
-    days,
-    isRunning,
-    start,
-    pause,
-    reset,
   } = timer;
 
   return (
