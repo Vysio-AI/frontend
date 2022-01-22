@@ -1,25 +1,22 @@
-const { getAccessTokenSilently } = useAuth0();
-const BASE_URL = process.env.API_BASE_URL;
-
 // Module for interacting with the practitioners API provided by api.vysio.ca
 
-const getPractitioner = async (id) => {
+const getPractitioner = (id) => {
     // TODO
 }
 
-const getPractitioners = async (id) => {
+const getPractitioners = (id) => {
     // TODO
 }
 
-const getPractitionerClients = async (id) => {
+const getPractitionerClients = (id) => {
     // TODO
 }
 
-const updatePractitioner = async () => {
+const updatePractitioner = () => {
     // TODO
 }
 
-const deletePractitioner = async () => {
+const deletePractitioner = () => {
     // TODO
 }
 

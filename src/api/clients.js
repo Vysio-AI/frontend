@@ -1,29 +1,26 @@
-const { getAccessTokenSilently } = useAuth0();
-const BASE_URL = process.env.API_BASE_URL;
-
 // Module for interacting with the clients API provided by api.vysio.ca
 
-const getClient = async (id) => {
+const getClient = (id) => {
     // TODO
 }
 
-const getClientProtocols = async (id) => {
+const getClientProtocols = (id) => {
     // TODO
 }
 
-const getClientSessions = async (id) => {
+const getClientSessions = (id) => {
     // TODO
 }
 
-const getClients = async () => {
+const getClients = () => {
     // TODO
 }
 
-const updateClient = async () => {
+const updateClient = () => {
     // TODO
 }
 
-const deleteClient = async () => {
+const deleteClient = () => {
     // TODO
 }
 

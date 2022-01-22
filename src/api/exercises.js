@@ -1,21 +1,18 @@
-const { getAccessTokenSilently } = useAuth0();
-const BASE_URL = process.env.API_BASE_URL;
-
 // Module for interacting with the exercises API provided by api.vysio.ca
 
-const getExercise = async (id) => {
-    fetch(`${BASE_URL}/exercises/${id}`).then(res => res.json());
+const getExercise = (id) => {
+    return fetch(`${BASE_URL}/exercises/${id}`).then(res => res.json());
 }
 
-const createExercise = async (params) => {
-
-}
-
-const updateExercise = async () => {
+const createExercise = (params) => {
 
 }
 
-const deleteExercise = async () => {
+const updateExercise = () => {
+
+}
+
+const deleteExercise = () => {
 
 }
 

@@ -1,25 +1,22 @@
-const { getAccessTokenSilently } = useAuth0();
-const BASE_URL = process.env.API_BASE_URL;
-
 // Module for interacting with the organizations API provided by api.vysio.ca
 
-const getOrganization = async (id) => {
+const getOrganization = (id) => {
     // TODO
 }
 
-const getOrganizationPractitioners = async () => {
+const getOrganizationPractitioners = () => {
     // TODO
 }
 
-const getOrganizations = async () => {
+const getOrganizations = () => {
     // TODO
 }
 
-const updateOrganization = async () => {
+const updateOrganization = () => {
     // TODO
 }
 
-const deleteOrganization = async () => {
+const deleteOrganization = () => {
     // TODO
 }
 
