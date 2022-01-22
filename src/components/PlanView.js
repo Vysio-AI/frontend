@@ -11,11 +11,13 @@ import {
 
 import AddExerciseModal from "./AddExerciseModal";
 import DeletePlanModal from "./DeletePlanModal";
+import DeleteExerciseFromPlanModal from "./DeleteExerciseFromPlanModal";
 
 export default function PlanView({ plan, setShowDirectory }) {
 
   const [addExerciseModalOpen, setAddExerciseModalOpen] = useState(false)
   const [deletePlanModalOpen, setDeletePlanModalOpen] = useState(false)
+  const [deleteExerciseFromPlanModalOpen, setDeleteExerciseFromPlanModalOpen] = useState(false)
 
   return (
     <div className="bg-white shadow overflow-hidden sm:rounded-lg min-w-full xl:pr-96">
@@ -138,6 +140,7 @@ export default function PlanView({ plan, setShowDirectory }) {
                         <button
                           type="button"
                           className="inline-flex justify-center shadow-sm text-sm font-medium rounded-md bg-white"
+                          onClick={() => setDeleteExerciseFromPlanModalOpen(true)}
                         >
                           <TrashIcon className="ml-2 h-5 w-5 text-gray-500 hover:text-red-500" aria-hidden="true" />
                         </button>
@@ -151,7 +154,8 @@ export default function PlanView({ plan, setShowDirectory }) {
         </div>
       </div>
       <AddExerciseModal open={addExerciseModalOpen} setOpen={setAddExerciseModalOpen}/>
-      <DeletePlanModal open={deletePlanModalOpen} setOpen={setDeletePlanModalOpen}/>
+      <DeletePlanModal open={deletePlanModalOpen} setOpen={setDeletePlanModalOpen} plan={plan}/>
+      <DeleteExerciseFromPlanModal open={deleteExerciseFromPlanModalOpen} setOpen={setDeleteExerciseFromPlanModalOpen}/>
     </div>
   )
 }
