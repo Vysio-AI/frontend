@@ -4,6 +4,7 @@ import PlanList from "../../components/PlanList";
 import PlanView from "../../components/PlanView";
 import PageHeading from "../../components/PageHeading";
 import { useState } from 'react'
+import { PlusCircleIcon } from '@heroicons/react/outline'
 
 const directory = {
   S: [
@@ -24,21 +25,21 @@ const directory = {
           id: 0,
           name: "Shoulder Rotation",
           focus_area: "Shoulder",
-          length: 120,
+          length: 5,
           notes: "",
         },
         {
           id: 1,
           name: "Internal Rotation",
           focus_area: "Shoulder",
-          length: 120,
+          length: 5,
           notes: "",
         },
         {
           id: 2,
           name: "External Rotation",
           focus_area: "Shoulder",
-          length: 60,
+          length: 5,
           notes: "",
         },
       ],
@@ -57,14 +58,14 @@ const directory = {
           id: 3,
           name: "Trap Raises",
           focus_area: "Shoulder",
-          length: 600,
+          length: 10,
           notes: "",
         },
         {
           id: 4,
           name: "Upright Row",
           focus_area: "Shoulder",
-          length: 600,
+          length: 10,
           notes: "",
         },
       ],
