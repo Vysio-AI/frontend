@@ -1,6 +1,9 @@
-const BASE_URL = process.env.REACT_APP_API_BASE_URL;
+const { getAccessTokenSilently } = useAuth0();
+const BASE_URL = process.env.API_BASE_URL;
 
-const fetchVideoById = async (videoId, token) => {
+// Module for interacting with the videos API provided by api.vysio.ca
+
+const getVideo = async (videoId, token) => {
   
   const response = await fetch(BASE_URL + `/videos/${videoId}`, {
     headers: {
@@ -15,5 +18,5 @@ const fetchVideoById = async (videoId, token) => {
 }
 
 module.exports = {
-  fetchVideoById
+  getVideo
 }
