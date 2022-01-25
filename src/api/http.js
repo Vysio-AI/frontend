@@ -11,51 +11,67 @@ const getAccessToken = async () => {
 const postRequest = async (url, data = {}) => {
     const token = getAccessToken();
     const fullUrl = BASE_URL + url;
-    return fetch(fullUrl, {
+    const response = fetch(fullUrl, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(data),
-    }).then(response => response.json());
+    });
+    if (!response.ok) {
+        throw new Error('Network response was not ok');
+    }
+    return response.json();
 }
 
 const getRequest = async (url) => {
     const token = getAccessToken();
     const fullUrl = BASE_URL + url;
-    return fetch(fullUrl, {
+    const response = fetch(fullUrl, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
         },
-    }).then(response => response.json());
+    });
+    if (!response.ok) {
+        throw new Error('Network response was not ok');
+    }
+    return response.json();
 }
 
 const delRequest = async (url) => {
     const token = getAccessToken();
     const fullUrl = BASE_URL + url;
-    return fetch(fullUrl, {
+    const response = fetch(fullUrl, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
         },
-    }).then(response => response.json());
+    });
+    if (!response.ok) {
+        throw new Error('Network response was not ok');
+    }
+    return response.json();
 }
 
 const patchRequest = async (url, data = {}) => {
     const token = getAccessToken();
     const fullUrl = BASE_URL + url;
-    return fetch(fullUrl, {
+    const response = fetch(fullUrl, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(data),
-    }).then(response => response.json());
+    });
+    if (!response.ok) {
+        throw new Error('Network response was not ok');
+    }
+    return response.json();
 }
 
 module.exports = {
