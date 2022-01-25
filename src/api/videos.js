@@ -5,6 +5,6 @@ const getVideo = (videoId) => {
   return getRequest(`/videos/${videoId}`)
 }
 
-module.exports = {
+export {
   getVideo
 }

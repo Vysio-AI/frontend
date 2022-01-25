@@ -13,7 +13,7 @@ const getSignupStatus = () => {
     return getRequest('/signup-status');
 }
 
-module.exports = {
+export {
     signupPractitioner,
     signupClient,
     getSignupStatus

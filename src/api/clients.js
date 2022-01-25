@@ -17,8 +17,7 @@ const deleteClient = () => {
     return delRequest(`/clients/${clientId}`);
 }
 
-
-module.exports = {
+export {
     getClient,
     getClients,
     updateClient,

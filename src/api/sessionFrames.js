@@ -9,7 +9,7 @@ const getSessionFrames = (sessionId) => {
     return getRequest(`/sessions/${sessionId}/session-frames`);
 }
 
-module.exports = {
+export {
     getSessionFrame,
     getSessionFrames
 }

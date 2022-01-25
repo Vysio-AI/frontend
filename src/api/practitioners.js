@@ -22,7 +22,7 @@ const deletePractitioner = (practitionerId) => {
 }
 
 
-module.exports = {
+export {
     getPractitioner,
     getPractitioners,
     getPractitionerClients,

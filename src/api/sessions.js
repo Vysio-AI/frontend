@@ -18,7 +18,7 @@ const deleteSession = (sessionId) => {
 }
 
 
-module.exports = {
+export {
   getSession,
   getSessions,
   updateSession,

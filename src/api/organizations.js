@@ -22,7 +22,7 @@ const deleteOrganization = (orgId) => {
 }
 
 
-module.exports = {
+export {
     getOrganization,
     getOrganizations,
     getOrganizationPractitioners,

@@ -25,7 +25,7 @@ const deleteProtocol = (protocolId) => {
     return delRequest(`/protocols/${protocolId}`);
 }
 
-module.exports = {
+export {
     getProtocol,
     getProtocols,
     createProtocol,

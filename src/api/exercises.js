@@ -22,7 +22,7 @@ const deleteExercise = (exerciseId) => {
 }
 
 
-module.exports = {
+export {
     getExercise,
     createExercise,
     updateExercise,

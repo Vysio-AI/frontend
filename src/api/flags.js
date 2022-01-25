@@ -22,7 +22,7 @@ const deleteFlag = (flagId) => {
 }
 
 
-module.exports = {
+export {
   getFlag,
   createFlag,
   updateFlag,
