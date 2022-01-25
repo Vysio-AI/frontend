@@ -6,7 +6,8 @@ import {
   InformationCircleIcon,
   TrashIcon,
   PencilIcon,
-  PlusCircleIcon
+  PlusCircleIcon,
+  PlusSmIcon,
 } from '@heroicons/react/outline'
 
 import AddExerciseModal from "./AddExerciseModal";
@@ -41,10 +42,12 @@ export default function PlanView({ plan, setShowDirectory }) {
             <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
               {plan.patients.map(_patient => <img class="inline-block h-6 w-6 rounded-full ring-2 ring-white" src={_patient.imgUrl} alt=""/>)}
               <button
-                class="button"
+                type="button"
+                className="flex-shrink-0 bg-white inline-block h-7 w-7 items-center justify-center rounded-full border-2 border-dashed border-gray-200 text-gray-400 hover:text-gray-500 hover:border-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 onClick={() => {}}
               >
-                <PlusCircleIcon className="inline-block h-7 w-7 rounded-full ring-2 ring-white text-indigo-600 hover:text-indigo-500"/>
+                <span className="sr-only">Add team member</span>
+                <PlusSmIcon className="inline-block h-5 w-5 rounded-full" aria-hidden="true" />
               </button>
             </dd>
           </div>
