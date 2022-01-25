@@ -120,7 +120,7 @@ export default function AddExerciseModal({ open, setOpen }) {
                   </div>
                   <div className="mt-5">
                     <label htmlFor="length" className="block text-sm font-medium text-gray-700">
-                      Length
+                      Length (s)
                     </label>
                     <div className="mt-1">
                       <input
@@ -128,7 +128,7 @@ export default function AddExerciseModal({ open, setOpen }) {
                         name="length"
                         id="length"
                         className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                        placeholder="100"
+                        placeholder="30"
                       />
                     </div>
                   </div>
