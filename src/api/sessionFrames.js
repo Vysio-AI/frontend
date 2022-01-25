@@ -1,11 +1,12 @@
 // Module for interacting with the session frames API provided by api.vysio.ca
+import { getRequest, postRequest } from './http';
 
-const getSessionFrame = (id) => {
-    fetch(`${BASE_URL}/exercises/${id}`).then(res => res.json());
+const getSessionFrame = (frameId) => {
+    return getRequest(`/session-frames/${frameId}`)
 }
 
 const getSessionFrames = (sessionId) => {
-
+    return getRequest(`/sessions/${sessionId}/session-frames`);
 }
 
 module.exports = {

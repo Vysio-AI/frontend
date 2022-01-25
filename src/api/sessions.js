@@ -1,20 +1,20 @@
 // Module for interacting with the sessions API provided by api.vysio.ca
+import { getRequest, postRequest } from './http';
 
-const getSession = (id) => {
-  const response = await fetch(`${BASE_URL}/sessions/${id}`);
-  return response.json();
+const getSession = (sessionId) => {
+  return getRequest(`/sessions/${sessionId}`);
 }
 
-const getSessions = () => {
-
+const getSessions = (clientId) => {
+  return getRequest(`/clients/${clientId}/sessions`);
 }
 
-const updateSession = () => {
-
+const updateSession = (sessionId, updateData) => {
+  return patchRequest(`/sessions/${sessionId}`, updateData);
 }
 
-const deleteSession = () => {
-
+const deleteSession = (sessionId) => {
+  return delRequest(`/sessions/${sessionId}`);
 }
 
 

@@ -1,34 +1,25 @@
 // Module for interacting with the clients API provided by api.vysio.ca
+import { delRequest, getRequest, patchRequest, postRequest } from './http';
 
-const getClient = (id) => {
-    // TODO
-}
-
-const getClientProtocols = (id) => {
-    // TODO
-}
-
-const getClientSessions = (id) => {
-    // TODO
+const getClient = (clientId) => {
+    return getRequest(`/clients/${clientId}`);
 }
 
 const getClients = () => {
-    // TODO
+    return getRequest(`/clients`);
 }
 
-const updateClient = () => {
-    // TODO
+const updateClient = (updateData) => {
+    return patchRequest(`/clients/${clientId}`, updateData);
 }
 
 const deleteClient = () => {
-    // TODO
+    return delRequest(`/clients/${clientId}`);
 }
 
 
 module.exports = {
     getClient,
-    getClientProtocols,
-    getClientSessions,
     getClients,
     updateClient,
     deleteClient

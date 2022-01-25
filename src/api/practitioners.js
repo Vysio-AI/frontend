@@ -1,23 +1,24 @@
 // Module for interacting with the practitioners API provided by api.vysio.ca
+import { delRequest, getRequest, patchRequest, postRequest } from './http';
 
-const getPractitioner = (id) => {
-    // TODO
+const getPractitioner = (practitionerId) => {
+    return getRequest(`/practitioners/${practitionerId}`);
 }
 
-const getPractitioners = (id) => {
-    // TODO
+const getPractitioners = () => {
+    return getRequest(`/practitioners`);
 }
 
-const getPractitionerClients = (id) => {
-    // TODO
+const getPractitionerClients = (practitionerId) => {
+    return getRequest(`/practitioners/${practitionerId}/clients`);
 }
 
-const updatePractitioner = () => {
-    // TODO
+const updatePractitioner = (practitionerId, updateData) => {
+    return patchRequest(`/practitioners/${practitionerId}`, updateData);
 }
 
-const deletePractitioner = () => {
-    // TODO
+const deletePractitioner = (practitionerId) => {
+    return delRequest(`/practitioners/${practitionerId}`);
 }
 
 

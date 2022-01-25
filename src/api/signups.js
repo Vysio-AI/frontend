@@ -1,16 +1,16 @@
 // Module for interacting with the signup API provided by api.vysio.ca
+import { getRequest, postRequest } from './http';
 
-const signupPractitioner = (id) => {
-    fetch(`${BASE_URL}/exercises/${id}`)
-        .then(res => res.json()).data
-}
-
-const signupClient = (sessionId) => {
-
+const signupPractitioner = (firstName, lastName, email) => {
+    return postRequest('/practitioners/signup', {
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+    });
 }
 
 const getSignupStatus = () => {
-
+    return getRequest('/signup-status');
 }
 
 module.exports = {

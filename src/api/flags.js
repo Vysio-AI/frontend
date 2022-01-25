@@ -1,26 +1,30 @@
 // Module for interacting with the flags API provided by api.vysio.ca
+import { delRequest, getRequest, postRequest } from './http';
 
-const getFlag = (id) => {
-  const response = await fetch(`${BASE_URL}/flags/${id}`);
-  return response.json();
+const getFlag = (flagId) => {
+    return getRequest(`/flags/${flagId}`);
 }
 
-const getFlags = () => {
-
+const createFlag = (time, notes, sessionId) => {
+    return postRequest(`/flags`, {
+        time: time,
+        notes: notes,
+        sessionId: sessionId
+    });
 }
 
-const updateFlag = () => {
-
+const updateFlag = (flagId, updateData) => {
+    return patchRequest(`/flags/${flagId}`, updateData);
 }
 
-const deleteFlag = () => {
-
+const deleteFlag = (flagId) => {
+    return delRequest(`/flags/${flagId}`);
 }
 
 
 module.exports = {
   getFlag,
-  getFlags,
+  createFlag,
   updateFlag,
   deleteFlag
 }
