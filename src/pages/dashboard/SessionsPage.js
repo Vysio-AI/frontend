@@ -1,9 +1,11 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import Loading from "../../components/loading/Loading";
 import PageHeading from "../../components/PageHeading";
+import PaginationCardFooter from "../../components/PaginationCardFooter";
 import {
   ChevronRightIcon,
   CheckCircleIcon,
+  AnnotationIcon,
 } from "@heroicons/react/solid";
 
 const sessions = [
@@ -20,6 +22,7 @@ const sessions = [
     },
     date: '2022-01-08',
     dateFull: 'January 8, 2022',
+    notes: true,
   },
   {
     id: 2,
@@ -34,8 +37,29 @@ const sessions = [
     },
     date: '2022-01-07',
     dateFull: 'January 7, 2022',
+    notes: false,
   },
 ]
+
+function SessionNotesAnnotation(props) {
+  const isNotes = props.notes
+
+  if (isNotes) {
+    return (
+      <p className="mt-2 flex items-center text-sm text-gray-500">
+        <AnnotationIcon className="flex-shrink-0 mr-1.5 h-5 w-5 text-indigo-500" aria-hidden="true" />
+        Patient left notes
+      </p>
+    )
+  } else {
+    return (
+      <p className="mt-2 flex items-center text-sm text-gray-500">
+        No patient notes
+      </p>
+    )
+  }
+}
+
 
 export default function SessionsPage() {
   const { isLoading } = useAuth0();
@@ -69,10 +93,7 @@ export default function SessionsPage() {
                           <p className="text-sm text-gray-900">
                             Completed on <time dateTime={session.date}>{session.dateFull}</time>
                           </p>
-                          <p className="mt-2 flex items-center text-sm text-gray-500">
-                            <CheckCircleIcon className="flex-shrink-0 mr-1.5 h-5 w-5 text-green-400" aria-hidden="true" />
-                            Patient left notes
-                          </p>
+                          <SessionNotesAnnotation notes={session.notes} />
                         </div>
                       </div>
                     </div>
@@ -85,6 +106,7 @@ export default function SessionsPage() {
             </li>
           ))}
         </ul>
+        <PaginationCardFooter/>
       </div>
     </div>
   )

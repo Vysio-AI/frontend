@@ -1,94 +1,91 @@
-import React from 'react';
-import { PaperClipIcon } from '@heroicons/react/outline'
-import { PlusCircleIcon, PencilIcon, TrashIcon } from '@heroicons/react/solid'
+import React, { useState } from 'react';
+import {
+  UserGroupIcon,
+  CalendarIcon,
+  ClockIcon,
+  InformationCircleIcon,
+  TrashIcon,
+  PencilIcon,
+  PlusCircleIcon,
+  PlusSmIcon,
+} from '@heroicons/react/outline'
+
+import AddExerciseModal from "./AddExerciseModal";
+import DeletePlanModal from "./DeletePlanModal";
+import DeleteExerciseFromPlanModal from "./DeleteExerciseFromPlanModal";
 
 export default function PlanView({ plan, setShowDirectory }) {
 
+  const [addExerciseModalOpen, setAddExerciseModalOpen] = useState(false)
+  const [deletePlanModalOpen, setDeletePlanModalOpen] = useState(false)
+  const [deleteExerciseFromPlanModalOpen, setDeleteExerciseFromPlanModalOpen] = useState(false)
+
   return (
     <div className="bg-white shadow overflow-hidden sm:rounded-lg min-w-full xl:pr-96">
-      <div className="mt-6 sm:flex-1 sm:min-w-0 sm:flex sm:items-center sm:justify-end sm:space-x-6 sm:pb-1">
-        <div className="sm:hidden 2xl:block mt-6 min-w-0 flex-1">
-          <h1 className="text-2xl font-bold text-gray-900 truncate ml-4">{plan.name}</h1>
-        </div>
-        <div className="mt-6 flex flex-col justify-stretch space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4">
-          <button
-            type="button"
-            className="inline-flex justify-center px-4 py-2 shadow-sm text-sm font-medium rounded-md bg-white"
-          >
-            <TrashIcon className="-ml-1 mr-2 h-5 w-5 text-gray-500 hover:text-red-500" aria-hidden="true" />
-          </button>
-        </div>
+      <div className="mt-6 justify-between py-4 px-4 sm:flex-1 sm:min-w-0 sm:flex sm:items-center sm:space-x-6 sm:pb-1">
+        <h1 className="text-2xl font-bold text-gray-900 truncate">{plan.name}</h1>
+        <button
+          type="button"
+          className="inline-flex justify-center shadow-sm text-sm font-medium rounded-md bg-white"
+          onClick={() => setDeletePlanModalOpen(true)}
+        >
+          <TrashIcon className="-ml-1 mr-2 h-5 w-5 text-gray-500 hover:text-red-500" aria-hidden="true" />
+        </button>
       </div>
       <div className="border-t border-gray-200 px-4 py-5 sm:p-0">
         <dl className="sm:divide-y sm:divide-gray-200">
           <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-            <dt className="text-sm font-medium text-gray-500">People</dt>
+            <dt className="text-sm font-medium text-gray-500 inline-flex items-center">
+              <UserGroupIcon className="text-sm h-5 w-5 mr-2" />
+              People
+            </dt>
             <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
               {plan.patients.map(_patient => <img class="inline-block h-6 w-6 rounded-full ring-2 ring-white" src={_patient.imgUrl} alt=""/>)}
+              <button
+                type="button"
+                className="flex-shrink-0 bg-white inline-block h-7 w-7 items-center justify-center rounded-full border-2 border-dashed border-gray-200 text-gray-400 hover:text-gray-500 hover:border-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                onClick={() => {}}
+              >
+                <span className="sr-only">Add team member</span>
+                <PlusSmIcon className="inline-block h-5 w-5 rounded-full" aria-hidden="true" />
+              </button>
             </dd>
           </div>
           <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-            <dt className="text-sm font-medium text-gray-500">Frequency</dt>
+            <dt className="text-sm font-medium text-gray-500 inline-flex items-center">
+              <CalendarIcon className="text-sm h-5 w-5 mr-2" />
+              Frequency
+            </dt>
             <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{plan.frequency}</dd>
           </div>
           <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-            <dt className="text-sm font-medium text-gray-500">Length</dt>
+            <dt className="text-sm font-medium text-gray-500 inline-flex items-center">
+              <ClockIcon className="text-sm h-5 w-5 mr-2" />
+              Length
+            </dt>
             <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-              {plan.exercises.map(i=>i.length).reduce((a,b) =>a+b)} Seconds
+              {plan.exercises.map(i=>i.length).reduce((a,b) =>a+b)} Minutes
             </dd>
           </div>
           <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-            <dt className="text-sm font-medium text-gray-500">Exercise Count</dt>
+            <dt className="text-sm font-medium text-gray-500 inline-flex items-center">
+              <InformationCircleIcon className="text-sm h-5 w-5 mr-2" />
+              Exercise Count
+            </dt>
             <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-              {plan.exercises.length}
-            </dd>
-          </div>
-          <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-            <dt className="text-sm font-medium text-gray-500">About</dt>
-            <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-              Fugiat ipsum ipsum deserunt culpa aute sint do nostrud anim incididunt cillum culpa consequat. Excepteur
-              qui ipsum aliquip consequat sint. Sit id mollit nulla mollit nostrud in ea officia proident. Irure nostrud
-              pariatur mollit ad adipisicing reprehenderit deserunt qui eu.
-            </dd>
-          </div>
-          <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-            <dt className="text-sm font-medium text-gray-500">Attachments</dt>
-            <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-              <ul className="border border-gray-200 rounded-md divide-y divide-gray-200">
-                <li className="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
-                  <div className="w-0 flex-1 flex items-center">
-                    <PaperClipIcon className="flex-shrink-0 h-5 w-5 text-gray-400" aria-hidden="true" />
-                    <span className="ml-2 flex-1 w-0 truncate">resume_back_end_developer.pdf</span>
-                  </div>
-                  <div className="ml-4 flex-shrink-0">
-                    <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                      Download
-                    </a>
-                  </div>
-                </li>
-                <li className="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
-                  <div className="w-0 flex-1 flex items-center">
-                    <PaperClipIcon className="flex-shrink-0 h-5 w-5 text-gray-400" aria-hidden="true" />
-                    <span className="ml-2 flex-1 w-0 truncate">coverletter_back_end_developer.pdf</span>
-                  </div>
-                  <div className="ml-4 flex-shrink-0">
-                    <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                      Download
-                    </a>
-                  </div>
-                </li>
-              </ul>
+              {plan.exercises.length} Exercises
             </dd>
           </div>
         </dl>
       </div>
-      <div className="flex flex-row justify-between items-center px-2 py-2">
-        <h3 className="text-lg font-medium text-gray-900">Exercises</h3>
+      <div className="flex flex-row justify-between items-center py-4 px-4">
+        <h3 className="ml-2 text-lg font-medium text-gray-900">Exercises</h3>
         <button
           type="button"
           className="inline-flex justify-center text-sm font-medium rounded-md bg-white"
+          onClick={() => setAddExerciseModalOpen(true)}
         >
-          <PlusCircleIcon className="-ml-1 mr-2 h-5 w-5 text-indigo-600 hover:text-indigo-500" aria-hidden="true" />
+          <PlusCircleIcon className="h-5 w-5 text-indigo-600 hover:text-indigo-500" aria-hidden="true" />
         </button>
       </div>
       <div className="flex flex-col">
@@ -139,15 +136,16 @@ export default function PlanView({ plan, setShowDirectory }) {
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-sm">
                         <button
                           type="button"
-                          className="inline-flex justify-center px-4 py-2 shadow-sm text-sm font-medium rounded-md bg-white"
+                          className="inline-flex justify-center shadow-sm text-sm font-medium rounded-md bg-white"
                         >
-                          <PencilIcon className="-ml-1 mr-2 h-5 w-5 text-gray-500 hover:text-indigo-500" aria-hidden="true" />
+                          <PencilIcon className="h-5 w-5 text-gray-500 hover:text-indigo-500" aria-hidden="true" />
                         </button>
                         <button
                           type="button"
-                          className="inline-flex justify-center px-4 py-2 shadow-sm text-sm font-medium rounded-md bg-white"
+                          className="inline-flex justify-center shadow-sm text-sm font-medium rounded-md bg-white"
+                          onClick={() => setDeleteExerciseFromPlanModalOpen(true)}
                         >
-                          <TrashIcon className="-ml-1 mr-2 h-5 w-5 text-gray-500 hover:text-red-500" aria-hidden="true" />
+                          <TrashIcon className="ml-2 h-5 w-5 text-gray-500 hover:text-red-500" aria-hidden="true" />
                         </button>
                       </td>
                     </tr>
@@ -158,6 +156,9 @@ export default function PlanView({ plan, setShowDirectory }) {
           </div>
         </div>
       </div>
+      <AddExerciseModal open={addExerciseModalOpen} setOpen={setAddExerciseModalOpen}/>
+      <DeletePlanModal open={deletePlanModalOpen} setOpen={setDeletePlanModalOpen} plan={plan}/>
+      <DeleteExerciseFromPlanModal open={deleteExerciseFromPlanModalOpen} setOpen={setDeleteExerciseFromPlanModalOpen}/>
     </div>
   )
 }

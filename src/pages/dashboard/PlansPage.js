@@ -4,6 +4,7 @@ import PlanList from "../../components/PlanList";
 import PlanView from "../../components/PlanView";
 import PageHeading from "../../components/PageHeading";
 import { useState } from 'react'
+import { PlusCircleIcon } from '@heroicons/react/outline'
 
 const directory = {
   S: [
@@ -24,21 +25,21 @@ const directory = {
           id: 0,
           name: "Shoulder Rotation",
           focus_area: "Shoulder",
-          length: 120,
+          length: 5,
           notes: "",
         },
         {
           id: 1,
           name: "Internal Rotation",
           focus_area: "Shoulder",
-          length: 120,
+          length: 5,
           notes: "",
         },
         {
           id: 2,
           name: "External Rotation",
           focus_area: "Shoulder",
-          length: 60,
+          length: 5,
           notes: "",
         },
       ],
@@ -57,14 +58,14 @@ const directory = {
           id: 3,
           name: "Trap Raises",
           focus_area: "Shoulder",
-          length: 600,
+          length: 10,
           notes: "",
         },
         {
           id: 4,
           name: "Upright Row",
           focus_area: "Shoulder",
-          length: 600,
+          length: 10,
           notes: "",
         },
       ],
@@ -108,23 +109,4 @@ export default function PlansPage() {
       </div>
     </div>
   )
-  // return (
-  //   <div className="relative h-screen flex overflow-hidden bg-white">
-  //     <div className="flex flex-col min-w-0 flex-1 overflow-hidden">
-  //       <div className="flex-1 relative z-0 flex overflow-hidden">
-  //         {showDirectory &&
-  //           <div className="xl:hidden order-first flex flex-col flex-shrink-0 w-96 border-r border-gray-200">
-  //             <PlanList directory={directory} setShowPlan={setShowPlan} />
-  //           </div>
-  //         }
-  //         {!showDirectory &&
-  //           <PlanView plan={plan} setShowDirectory={setShowDirectory} />
-  //         }
-  //         <aside className="hidden xl:order-first xl:flex xl:flex-col flex-shrink-0 w-96 border-r border-gray-200">
-  //           <PlanList directory={directory} setShowPlan={setShowPlan} />
-  //         </aside>
-  //       </div>
-  //     </div>
-  //   </div>
-  // )
 }
