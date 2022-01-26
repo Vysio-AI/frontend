@@ -12,96 +12,72 @@ const getAccessToken = async () => {
 const postRequest = async (url, data = {}) => {
     const token = await getAccessToken();
     const fullUrl = BASE_URL + url;
-    try {
-        const response = await fetch(fullUrl, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            },
-            body: JSON.stringify(data),
-        })
-        if (!response.ok) {
-            throw new Error(`POST request to ${url} gave a bad response`);
-        }
-        return response.json();
+
+    const response = await fetch(fullUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(data),
+    })
+    if (!response.ok) {
+        throw new Error(`POST request to ${url} gave a bad response`);
     }
-    catch(e) {
-        // TypeError occurs only when there are connection issues not for 400/500 responses
-        // We throw an error manually for react-query to pick up
-        throw new Error(e);
-    }
+    return response.json();
 }
 
 const getRequest = async (url) => {
     const token = await getAccessToken();
     const fullUrl = BASE_URL + url;
-    try {
-        const response = await fetch(fullUrl, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            },
-        })
-        console.log(response);
-        if (!response.ok) {
-            throw new Error(`GET request to ${url} gave a bad response`);
-        }
-        return response.json();
+
+    const response = await fetch(fullUrl, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+    })
+    console.log(response);
+    if (!response.ok) {
+        throw new Error(`GET request to ${url} gave a bad response`);
     }
-    catch(e) {
-        // TypeError occurs only when there are connection issues not for 400/500 responses
-        // We throw an error manually for react-query to pick up
-        throw new Error(e);
-    }
+    return response.json();
 }
 
 const delRequest = async (url) => {
     const token = await getAccessToken();
     const fullUrl = BASE_URL + url;
-    try {
-        const response = await fetch(fullUrl, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            },
-        })
-        if (!response.ok) {
-            throw new Error(`DELETE request to ${url} gave a bad response`);
-        }
-        return response.json();
+
+    const response = await fetch(fullUrl, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+    })
+    if (!response.ok) {
+        throw new Error(`DELETE request to ${url} gave a bad response`);
     }
-    catch(e) {
-        // TypeError occurs only when there are connection issues not for 400/500 responses
-        // We throw an error manually for react-query to pick up
-        throw new Error(e);
-    }
+    return response.json();
 }
 
 const patchRequest = async (url, data = {}) => {
     const token = await getAccessToken();
     const fullUrl = BASE_URL + url;
-    try {
-        const response = await fetch(fullUrl, {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            },
-            body: JSON.stringify(data),
-        })
-        if (!response.ok) {
-            throw new Error(`PATCH request to ${url} gave a bad response`);
-        }
-        return response.json();
+
+    const response = await fetch(fullUrl, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(data),
+    })
+    if (!response.ok) {
+        throw new Error(`PATCH request to ${url} gave a bad response`);
     }
-    catch(e) {
-        // TypeError occurs only when there are connection issues not for 400/500 responses
-        // We throw an error manually for react-query to pick up
-        throw new Error(e);
-    }
+    return response.json();
 }
 
 export {
