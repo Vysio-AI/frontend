@@ -17,6 +17,12 @@ import DashboardLoading from "../components/loading/DashboardLoading";
 import LogoutButton from "../components/buttons/LogoutButton";
 import logo from '../assets/vysio.png';
 
+import { useQuery } from 'react-query';
+import { getSignupStatus } from '../api/signups';
+import { useHistory } from "react-router-dom";
+
+import NewUserModal from "../components/NewUserModal";
+
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: HomeIcon },
   { name: 'Patients', href: '/dashboard/patients', icon: UsersIcon },
@@ -33,26 +39,48 @@ function isCurrent(href) {
 }
 
 function DashboardLayout({ children }) {
-  const { user, isAuthenticated, isLoading, loginWithRedirect } = useAuth0();
+  const { user, isAuthenticated, isLoading, loginWithRedirect, logout } = useAuth0();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [newUserModalOpen, setNewUserModalOpen] = useState(false);
+  const history = useHistory();
 
-  // const { isLoading: isQueryLoading, isError, data, error } = useQuery('accountInfo', () => {
-  //   const data = await 
-  // });
+  const signupStatus = useQuery('signup-status', getSignupStatus);
 
   if (isLoading) {
     console.log("Navlength: " + navigation.length);
     return <DashboardLoading navLength={navigation.length} />
   }
 
-  // if (isError) {
-  //   return <span>Error: {error.message}</span>
-  // }
-
   if (!isAuthenticated) {
     loginWithRedirect({
       redirectUri: window.location.origin + '/dashboard'
     })
+  }
+
+  console.log(signupStatus);
+
+  if (signupStatus.isLoading) {
+    return <DashboardLoading navLength={navigation.length} />
+  }
+
+  if (signupStatus.isError || !signupStatus.data) {
+    logout({ returnTo: window.location.origin });
+    history.push("/");
+  }
+
+  // User has not been signed up previously
+  if (signupStatus.data.signedUp == false && !newUserModalOpen) {
+    setNewUserModalOpen(true);
+  }
+
+  // User has signed up previously as a client
+  if (signupStatus.data.signedUp && signupStatus.data.type == 'client') {
+    logout({ returnTo: window.location.origin });
+    history.push("/");
+  }
+
+  if (signupStatus.data.signedUp && signupStatus.data.type == 'practitioner' && newUserModalOpen) {
+    setNewUserModalOpen(false);
   }
 
   return (
@@ -242,6 +270,7 @@ function DashboardLayout({ children }) {
           </div>
         </main>
       </div>
+      <NewUserModal open={newUserModalOpen} setOpen={setNewUserModalOpen} user={user}/>
     </div>
   )
 }

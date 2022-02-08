@@ -15,6 +15,5 @@ const getSignupStatus = () => {
 
 export {
     signupPractitioner,
-    signupClient,
     getSignupStatus
 }
