@@ -4,6 +4,8 @@ import PatientList from "../../components/PatientList";
 import PatientView from "../../components/PatientView";
 import PageHeading from "../../components/PageHeading";
 import { useState } from 'react'
+import { useQuery } from 'react-query';
+import { getClients } from '../../api/clients';
 
 const directory = {
   A: [
@@ -215,14 +217,18 @@ export default function PatientsPage() {
   const [showDirectory, setShowDirectory] = useState(true);
   const [patient, setPatient] = useState(null);
 
+  const clients = useQuery('clients', () => getClients(100, 0));
+
   const setShowPatient = (patient) => {
     setPatient(patient);
     setShowDirectory(false);
   }
 
-  if (isLoading) {
+  if (clients.isLoading || isLoading) {
     return <Loading />
   }
+
+  console.log(clients.data)
 
   return (
     <div>

@@ -5,15 +5,15 @@ const getClient = (clientId) => {
     return getRequest(`/clients/${clientId}`);
 }
 
-const getClients = () => {
-    return getRequest(`/clients`);
+const getClients = (limit, offset) => {
+    return getRequest(`/clients?limit=${limit}&offset=${offset}`);
 }
 
-const updateClient = (updateData) => {
+const updateClient = (clientId, updateData) => {
     return patchRequest(`/clients/${clientId}`, updateData);
 }
 
-const deleteClient = () => {
+const deleteClient = (clientId) => {
     return delRequest(`/clients/${clientId}`);
 }
 

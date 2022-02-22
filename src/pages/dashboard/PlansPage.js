@@ -4,6 +4,8 @@ import PlanList from "../../components/PlanList";
 import PlanView from "../../components/PlanView";
 import PageHeading from "../../components/PageHeading";
 import { useState } from 'react'
+import { useQuery } from 'react-query';
+import { getClients } from '../../api/clients';
 import { PlusCircleIcon } from '@heroicons/react/outline'
 
 const directory = {
