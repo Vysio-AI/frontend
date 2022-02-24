@@ -4,9 +4,9 @@ import PlanList from "../../components/PlanList";
 import PlanView from "../../components/PlanView";
 import PageHeading from "../../components/PageHeading";
 import { useState } from 'react'
-import { useQuery } from 'react-query';
-import { getClients } from '../../api/clients';
 import { PlusCircleIcon } from '@heroicons/react/outline'
+import { useQuery, useMutation, useQueryClient } from 'react-query';
+import { createPlan, getPlans } from '../../api/plans';
 
 const directory = {
   S: [
@@ -78,33 +78,57 @@ const directory = {
 export default function PlansPage() {
   const { isLoading } = useAuth0();
   const [showDirectory, setShowDirectory] = useState(true);
-  const [plan, setPlan] = useState(null);
+  const [planId, setPlanId] = useState(null);
 
-  const setShowPlan = (plan) => {
-    setPlan(plan);
+  const queryClient = useQueryClient();
+
+  const plans = useQuery('plans', getPlans);
+
+  const createDefaultPlan = useMutation(() => createPlan("Default", 2, "WEEKLY"), {
+    onSuccess: () => {
+      return queryClient.invalidateQueries('plans')
+    },
+  })
+
+  const setShowPlan = (planId) => {
+    setPlanId(planId);
     setShowDirectory(false);
   }
 
-  if (isLoading) {
+  if (plans.isLoading || isLoading) {
     return <Loading />
   }
 
+  console.log(plans.data)
+
   return (
     <div>
-      <PageHeading title="Plans"/>
+      <div className="bg-white px-4 py-5 border-b border-gray-200 sm:px-6">
+        <div className="-ml-4 -mt-2 pl-2 pt-2 flex items-center justify-between flex-wrap sm:flex-nowrap">
+          <h1 className="text-2xl font-bold leading-6 text-gray-900">Plans</h1>
+          <div className="flex flex-row">
+            <button
+              className="px-3 py-2 bg-blue-400 rounded-lg text-white font-semibold"
+              onClick={() => createDefaultPlan.mutate()}
+            >
+              + Create Plan
+            </button>
+          </div>
+        </div>
+      </div>
       <div className="relative h-screen flex overflow-hidden bg-white">
         <div className="flex flex-col min-w-0 flex-1 overflow-hidden">
           <div className="flex-1 relative z-0 flex overflow-hidden">
             {showDirectory &&
               <div className="xl:hidden order-first flex flex-col flex-shrink-0 w-96 border-r border-gray-200">
-                <PlanList directory={directory} setShowPlan={setShowPlan} />
+                <PlanList plans={plans.data} setShowPlan={setShowPlan} currentlySelected={planId} />
               </div>
             }
             {!showDirectory &&
-              <PlanView plan={plan} setShowDirectory={setShowDirectory} />
+              <PlanView planId={planId} setShowDirectory={setShowDirectory} setPlanId={setPlanId}/>
             }
             <aside className="hidden xl:order-first xl:flex xl:flex-col flex-shrink-0 w-96 border-r border-gray-200">
-              <PlanList directory={directory} setShowPlan={setShowPlan} />
+              <PlanList plans={plans.data} setShowPlan={setShowPlan} currentlySelected={planId} />
             </aside>
           </div>
         </div>

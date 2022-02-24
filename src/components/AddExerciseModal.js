@@ -1,28 +1,67 @@
 import { Fragment, useRef, useState } from 'react'
 import { Dialog, Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, SelectorIcon } from '@heroicons/react/outline'
+import { useQuery, useMutation, useQueryClient } from 'react-query';
+import { createExercise } from '../api/exercises';
 
 const exercises = [
   {
-    name: "Exercise 1"
+    id: 1,
+    name: "Pendulum",
+    value: "PENDULUM"
   },
   {
-    name: "Exercise 2"
+    id: 2,
+    name: "Abduction",
+    value: "ABDUCTION"
   },
+  {
+    id: 3,
+    name: "Forward Elevation",
+    value: "FORWARD_ELEVATION"
+  },
+  {
+    id: 4,
+    name: "Internal Rotation",
+    value: "INTERNAL_ROTATION"
+  },
+  {
+    id: 5,
+    name: "External Rotation",
+    value: "EXTERNAL_ROTATION"
+  },
+  {
+    id: 6,
+    name: "Trapezius Extension",
+    value: "TRAPEZIUS_EXTENSION"
+  },
+  {
+    id: 7,
+    name: "Upright Row",
+    value: "UPRIGHT_ROW"
+  }
 ]
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function AddExerciseModal({ open, setOpen }) {
-  const [exerciseSelected, setExerciseSelected] = useState(exercises[1])
+export default function AddExerciseModal({ open, setOpen, planId }) {
+  const [exerciseSelected, setExerciseSelected] = useState(exercises[0])
+  const [notes, setNotes] = useState("")
+  const [duration, setDuration] = useState(30);
+
+  const queryClient = useQueryClient()
+
+  const addExercise = useMutation(() => createExercise(planId, exerciseSelected.value, duration), {
+    onSuccess: () => {
+      setOpen(false)
+      queryClient.invalidateQueries(['plan', planId])
+      return queryClient.invalidateQueries('plans')
+    },
+  })
 
   const cancelButtonRef = useRef(null)
-
-  function submitAddExercise() {
-    setOpen(false)
-  }
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -129,6 +168,8 @@ export default function AddExerciseModal({ open, setOpen }) {
                         id="length"
                         className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
                         placeholder="30"
+                        value={duration}
+                        onChange={e => setDuration(parseInt(e.target.value))}
                       />
                     </div>
                   </div>
@@ -142,7 +183,8 @@ export default function AddExerciseModal({ open, setOpen }) {
                         name="notes"
                         id="notes"
                         className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                        defaultValue={''}
+                        value={notes}
+                        onChange={e => setNotes(e.target.value)}
                       />
                     </div>
                   </div>
@@ -152,7 +194,7 @@ export default function AddExerciseModal({ open, setOpen }) {
                 <button
                   type="button"
                   className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm"
-                  onClick={() => submitAddExercise()}
+                  onClick={() => addExercise.mutate()}
                 >
                   Submit
                 </button>

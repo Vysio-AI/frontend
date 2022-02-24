@@ -1,13 +1,20 @@
 import { Fragment, useRef } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { ExclamationIcon } from '@heroicons/react/outline'
+import { useQuery, useMutation, useQueryClient } from 'react-query';
+import { deletePlan } from '../api/plans';
 
-export default function DeletePlanModal({ open, setOpen, plan }) {
+export default function DeletePlanModal({ open, setOpen, plan, setPlanId }) {
   const cancelButtonRef = useRef(null)
 
-  function deletePlan() {
-    setOpen(false)
-  }
+  const queryClient = useQueryClient();
+
+  const handleDeletePlan = useMutation(() => deletePlan(plan.id), {
+    onSuccess: () => {
+      setPlanId(null)
+      return queryClient.invalidateQueries('plans')
+    },
+  })
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -58,7 +65,10 @@ export default function DeletePlanModal({ open, setOpen, plan }) {
                 <button
                   type="button"
                   className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
-                  onClick={() => deletePlan()}
+                  onClick={() => {
+                    setOpen(false)
+                    handleDeletePlan.mutate()
+                  }}
                 >
                   Delete
                 </button>

@@ -265,7 +265,7 @@ function DashboardLayout({ children }) {
           </button>
         </div>
         <main className="flex-1 relative z-0 focus:outline-none">
-          <div className="max-w-7xl px-4 sm:px-6 md:px-8 overflow-y-auto">
+          <div className="max-w-full px-4 sm:px-6 md:px-8 overflow-y-auto">
             {children}
           </div>
         </main>

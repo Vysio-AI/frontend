@@ -228,8 +228,6 @@ export default function PatientsPage() {
     return <Loading />
   }
 
-  console.log(clients.data)
-
   return (
     <div>
       <PageHeading title="Patients"/>

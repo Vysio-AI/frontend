@@ -15,6 +15,7 @@ import HomePage from './pages/dashboard/HomePage';
 import PatientsPage from './pages/dashboard/PatientsPage';
 import PlansPage from './pages/dashboard/PlansPage';
 import SessionsPage from './pages/dashboard/SessionsPage';
+import SessionViewPage from './pages/dashboard/SessionViewPage';
 import ProfilePage from './pages/dashboard/ProfilePage';
 import NotFound from './pages/errors/NotFound';
 
@@ -31,6 +32,7 @@ function App() {
     "/dashboard",
     "/dashboard/patients",
     "/dashboard/plans",
+    "/dashboard/sessions/:sessionId",
     "/dashboard/sessions",
     "/dashboard/profile",
   ];
@@ -50,6 +52,7 @@ function App() {
           <Route exact path="/dashboard" component={HomePage}></Route>
           <Route exact path="/dashboard/patients" component={PatientsPage}></Route>
           <Route exact path="/dashboard/plans" component={PlansPage}></Route>
+          <Route exact path="/dashboard/sessions/:sessionId" component={SessionViewPage}></Route>
           <Route exact path="/dashboard/sessions" component={SessionsPage}></Route>
           <Route exact path="/dashboard/profile" component={ProfilePage}></Route>
         </DashboardLayout>

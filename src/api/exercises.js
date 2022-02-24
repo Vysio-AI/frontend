@@ -5,9 +5,9 @@ const getExercise = (exerciseId) => {
     return getRequest(`/exercises/${exerciseId}`)
 }
 
-const createExercise = (protocolId, activityType, duration) => {
+const createExercise = (planId, activityType, duration) => {
     return postRequest(`/exercises`, {
-        protocolId: protocolId,
+        planId: planId,
         activityType: activityType,
         duration: duration
     });

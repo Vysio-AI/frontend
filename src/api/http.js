@@ -59,7 +59,7 @@ const delRequest = async (url) => {
     if (!response.ok) {
         throw new Error(`DELETE request to ${url} gave a bad response`);
     }
-    return response.json();
+    return
 }
 
 const patchRequest = async (url, data = {}) => {

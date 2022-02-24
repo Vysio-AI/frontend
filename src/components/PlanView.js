@@ -10,20 +10,29 @@ import {
   PlusSmIcon,
 } from '@heroicons/react/outline'
 
+import { useQuery } from 'react-query';
+import { getPlan } from '../api/plans';
+
 import AddExerciseModal from "./AddExerciseModal";
 import DeletePlanModal from "./DeletePlanModal";
 import DeleteExerciseFromPlanModal from "./DeleteExerciseFromPlanModal";
 
-export default function PlanView({ plan, setShowDirectory }) {
+export default function PlanView({ planId, setPlanId, setShowDirectory }) {
 
   const [addExerciseModalOpen, setAddExerciseModalOpen] = useState(false)
   const [deletePlanModalOpen, setDeletePlanModalOpen] = useState(false)
   const [deleteExerciseFromPlanModalOpen, setDeleteExerciseFromPlanModalOpen] = useState(false)
 
+  const plan = useQuery(['plan', planId], () => getPlan(planId));
+
+  if (plan.isError || plan.isLoading) {
+    return <div></div>
+  }
+
   return (
     <div className="bg-white shadow overflow-hidden sm:rounded-lg min-w-full xl:pr-96">
       <div className="mt-6 justify-between py-4 px-4 sm:flex-1 sm:min-w-0 sm:flex sm:items-center sm:space-x-6 sm:pb-1">
-        <h1 className="text-2xl font-bold text-gray-900 truncate">{plan.name}</h1>
+        <h1 className="text-2xl font-bold text-gray-900 truncate">{plan.data.name}</h1>
         <button
           type="button"
           className="inline-flex justify-center shadow-sm text-sm font-medium rounded-md bg-white"
@@ -40,7 +49,7 @@ export default function PlanView({ plan, setShowDirectory }) {
               People
             </dt>
             <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-              {plan.patients.map(_patient => <img class="inline-block h-6 w-6 rounded-full ring-2 ring-white" src={_patient.imgUrl} alt=""/>)}
+              { plan.data.clients.map(_client => <img class="inline-block h-6 w-6 rounded-full ring-2 ring-white" src={_client.imgUrl} alt=""/>)}
               <button
                 type="button"
                 className="flex-shrink-0 bg-white inline-block h-7 w-7 items-center justify-center rounded-full border-2 border-dashed border-gray-200 text-gray-400 hover:text-gray-500 hover:border-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
@@ -56,7 +65,7 @@ export default function PlanView({ plan, setShowDirectory }) {
               <CalendarIcon className="text-sm h-5 w-5 mr-2" />
               Frequency
             </dt>
-            <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{plan.frequency}</dd>
+            <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 capitalize">{plan.data.repetitions}x {plan.data.timeframe?.toLowerCase()}</dd>
           </div>
           <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
             <dt className="text-sm font-medium text-gray-500 inline-flex items-center">
@@ -64,7 +73,7 @@ export default function PlanView({ plan, setShowDirectory }) {
               Length
             </dt>
             <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-              {plan.exercises.map(i=>i.length).reduce((a,b) =>a+b)} Minutes
+              {(plan.data.exercises.map(i=>i.duration)?.reduce((a,b) => a+b, 0) / 60).toFixed(2)} Minutes
             </dd>
           </div>
           <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -73,7 +82,7 @@ export default function PlanView({ plan, setShowDirectory }) {
               Exercise Count
             </dt>
             <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-              {plan.exercises.length} Exercises
+              {plan.data.exercises.duration} Exercises
             </dd>
           </div>
         </dl>
@@ -111,7 +120,7 @@ export default function PlanView({ plan, setShowDirectory }) {
                       scope="col"
                       className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                     >
-                      Length
+                      Duration
                     </th>
                     <th
                       scope="col"
@@ -125,13 +134,13 @@ export default function PlanView({ plan, setShowDirectory }) {
                   </tr>
                 </thead>
                 <tbody>
-                  {plan.exercises.map((exercise, exerciseIdx) => (
+                  {plan.data.exercises.map((exercise, exerciseIdx) => (
                     <tr key={exercise.id} className={exerciseIdx % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-indigo-600">
-                        <a href="#" className="hover:text-indigo-500">{exercise.name}</a>
+                        <a href="#" className="hover:text-indigo-500">{exercise.activityType}</a>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{exercise.focus_area}</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{exercise.length}</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Shoulder</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{exercise.duration} Seconds</td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{exercise.notes}</td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-sm">
                         <button
@@ -156,8 +165,8 @@ export default function PlanView({ plan, setShowDirectory }) {
           </div>
         </div>
       </div>
-      <AddExerciseModal open={addExerciseModalOpen} setOpen={setAddExerciseModalOpen}/>
-      <DeletePlanModal open={deletePlanModalOpen} setOpen={setDeletePlanModalOpen} plan={plan}/>
+      <AddExerciseModal open={addExerciseModalOpen} setOpen={setAddExerciseModalOpen} planId={planId} />
+      <DeletePlanModal open={deletePlanModalOpen} setOpen={setDeletePlanModalOpen} plan={plan.data} setPlanId={setPlanId}/>
       <DeleteExerciseFromPlanModal open={deleteExerciseFromPlanModalOpen} setOpen={setDeleteExerciseFromPlanModalOpen}/>
     </div>
   )
