@@ -7,6 +7,7 @@ import InvitePatientModal from "../../components/InvitePatientModal";
 import { useState } from 'react'
 import { useQuery } from 'react-query';
 import { getClients } from '../../api/clients';
+import InviteDropdown from "../../components/InviteDropdown";
 
 const directory = {
   A: [
@@ -238,9 +239,10 @@ export default function PatientsPage() {
       <div className="bg-white px-4 py-5 border-b border-gray-200 sm:px-6">
         <div className="-ml-4 -mt-2 pl-2 pt-2 flex items-center justify-between flex-wrap sm:flex-nowrap">
           <h1 className="text-2xl font-bold leading-6 text-gray-900">Patients</h1>
-          <div className="flex flex-row">
+          <div className="flex flex-row items-center">
+            <InviteDropdown />
             <button
-              className="px-3 py-2 bg-blue-400 rounded-lg text-white font-semibold"
+              className="ml-2 px-4 py-2 bg-blue-400 rounded-lg text-white font-semibold"
               onClick={() => setInvitePatientModalOpen(true)}
             >
               + Invite

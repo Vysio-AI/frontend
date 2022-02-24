@@ -7,7 +7,7 @@ const getInvites = () => {
 
 const createInvite = (clientEmail, clientFirstName, clientLastName) => {
     // Default expiry 7 days
-    const defaultExpiry = new Date().setDate(new Date().getDate() + 7);
+    const defaultExpiry = new Date(new Date().setDate(new Date().getDate() + 7));
     return postRequest(`/invites`, {
         clientEmail: clientEmail,
         clientFirstName: clientFirstName,
