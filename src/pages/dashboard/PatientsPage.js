@@ -217,14 +217,14 @@ const directory = {
 export default function PatientsPage() {
   const { isLoading } = useAuth0();
   const [showDirectory, setShowDirectory] = useState(true);
-  const [patient, setPatient] = useState(null);
+  const [patientId, setPatientId] = useState(null);
 
   const [invitePatientModalOpen, setInvitePatientModalOpen] = useState(false);
 
   const clients = useQuery('clients', () => getClients(100, 0));
 
-  const setShowPatient = (patient) => {
-    setPatient(patient);
+  const setShowPatient = (patientId) => {
+    setPatientId(patientId);
     setShowDirectory(false);
   }
 
@@ -255,14 +255,14 @@ export default function PatientsPage() {
           <div className="flex-1 relative z-0 flex overflow-hidden">
             {showDirectory &&
               <div className="xl:hidden order-first flex flex-col flex-shrink-0 w-96 border-r border-gray-200">
-                <PatientList directory={directory} setShowPatient={setShowPatient} />
+                <PatientList patients={clients.data} setShowPatient={setShowPatient} currentlySelected={patientId} />
               </div>
             }
             {!showDirectory &&
-              <PatientView patient={patient} setShowDirectory={setShowDirectory} />
+              <PatientView patientId={patientId} setPatientId={setPatientId} setShowDirectory={setShowDirectory} />
             }
             <aside className="hidden xl:order-first xl:flex xl:flex-col flex-shrink-0 w-96 border-r border-gray-200">
-              <PatientList directory={directory} setShowPatient={setShowPatient} />
+              <PatientList patients={clients.data} setShowPatient={setShowPatient} currentlySelected={patientId} />
             </aside>
           </div>
         </div>

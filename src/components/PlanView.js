@@ -10,29 +10,88 @@ import {
   PlusSmIcon,
 } from '@heroicons/react/outline'
 
-import { useQuery } from 'react-query';
-import { getPlan } from '../api/plans';
+import { useQuery, useMutation, useQueryClient } from 'react-query';
+import { getPlan, updatePlan } from '../api/plans';
 
 import AddExerciseModal from "./AddExerciseModal";
 import DeletePlanModal from "./DeletePlanModal";
 import DeleteExerciseFromPlanModal from "./DeleteExerciseFromPlanModal";
+import AddPatientDropdown from './AddPatientDropdown';
+import EditClientsModal from './EditClientsModal';
 
 export default function PlanView({ planId, setPlanId, setShowDirectory }) {
 
   const [addExerciseModalOpen, setAddExerciseModalOpen] = useState(false)
+  const [editClientsModalOpen, setEditClientsModalOpen] = useState(false)
   const [deletePlanModalOpen, setDeletePlanModalOpen] = useState(false)
   const [deleteExerciseFromPlanModalOpen, setDeleteExerciseFromPlanModalOpen] = useState(false)
+  const [editMode, setEditMode] = useState(null);
+  const [editName, setEditName] = useState(null);
+  const [editDuration, setEditDuration] = useState(null);
+  const [editTimeframe, setEditTimeframe] = useState(null);
+
+  const queryClient = useQueryClient();
 
   const plan = useQuery(['plan', planId], () => getPlan(planId));
+
+  const editPlan = useMutation((updateData) => updatePlan(planId, updateData), {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['plan', planId])
+      return queryClient.invalidateQueries('plans')
+    },
+  })
+
+  const handleUpdateName = () => {
+    setEditMode(null)
+    if (editName != plan.data.name) {
+      editPlan.mutate({
+        name: editName.trim()
+      })
+    }
+  }
+
+  const handleKeyPress = (event) => {
+    if (event.key == 'Enter') {
+      handleUpdateName()
+    }
+  }
 
   if (plan.isError || plan.isLoading) {
     return <div></div>
   }
 
+  if (plan.data && !editMode) {
+    if (editName != plan.data.name) {
+      setEditName(plan.data.name)
+    }
+    if (editDuration != plan.data.duration) {
+      setEditDuration(plan.data.duration)
+    }
+    if (editTimeframe != plan.data.timeframe) {
+      setEditTimeframe(plan.data.timeframe)
+    }
+  }
+
   return (
     <div className="bg-white shadow overflow-hidden sm:rounded-lg min-w-full xl:pr-96">
       <div className="mt-6 justify-between py-4 px-4 sm:flex-1 sm:min-w-0 sm:flex sm:items-center sm:space-x-6 sm:pb-1">
-        <h1 className="text-2xl font-bold text-gray-900 truncate">{plan.data.name}</h1>
+        { !(editMode == "name") &&
+          <h1 
+            className="text-2xl font-bold text-gray-900 truncate"
+            onClick={() => setEditMode("name")}
+          >{plan.data.name}</h1>
+        }
+        { editMode == "name" &&
+          <input
+            className="text-2xl font-bold text-gray-900 truncate border-0 border-b border-transparent focus:outline-none"
+            type="text"
+            value={editName}
+            onChange={(e) => setEditName(e.target.value)}
+            onKeyPress={handleKeyPress}
+            onBlur={handleUpdateName}
+            autoFocus={true}
+          />
+        }
         <button
           type="button"
           className="inline-flex justify-center shadow-sm text-sm font-medium rounded-md bg-white"
@@ -48,15 +107,16 @@ export default function PlanView({ planId, setPlanId, setShowDirectory }) {
               <UserGroupIcon className="text-sm h-5 w-5 mr-2" />
               People
             </dt>
-            <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-              { plan.data.clients.map(_client => <img class="inline-block h-6 w-6 rounded-full ring-2 ring-white" src={_client.imgUrl} alt=""/>)}
+            <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 flex flex-row items-center justify-between">
+              <div>
+                { plan.data.clients.map(_client => <img class="inline-block h-6 w-6 rounded-full ring-2 ring-white" src={_client.imgUrl} alt=""/>)}
+                <AddPatientDropdown planId={plan.data.id} />
+              </div>
               <button
-                type="button"
-                className="flex-shrink-0 bg-white inline-block h-7 w-7 items-center justify-center rounded-full border-2 border-dashed border-gray-200 text-gray-400 hover:text-gray-500 hover:border-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                onClick={() => {}}
+                onClick={() => setEditClientsModalOpen(true)}
+                className="p-1"
               >
-                <span className="sr-only">Add team member</span>
-                <PlusSmIcon className="inline-block h-5 w-5 rounded-full" aria-hidden="true" />
+                <PencilIcon className="w-5 h-5"/>
               </button>
             </dd>
           </div>
@@ -168,6 +228,7 @@ export default function PlanView({ planId, setPlanId, setShowDirectory }) {
       <AddExerciseModal open={addExerciseModalOpen} setOpen={setAddExerciseModalOpen} planId={planId} />
       <DeletePlanModal open={deletePlanModalOpen} setOpen={setDeletePlanModalOpen} plan={plan.data} setPlanId={setPlanId}/>
       <DeleteExerciseFromPlanModal open={deleteExerciseFromPlanModalOpen} setOpen={setDeleteExerciseFromPlanModalOpen}/>
+      <EditClientsModal open={editClientsModalOpen} setOpen={setEditClientsModalOpen} planId={planId} />
     </div>
   )
 }

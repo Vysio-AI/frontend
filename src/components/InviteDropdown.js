@@ -41,7 +41,7 @@ export default function InviteDropdown() {
         leaveTo="transform opacity-0 scale-95"
       >
         <Menu.Items className="origin-top-right absolute right-0 mt-2 w-96 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-          <div className="py-1">
+          <div className="py-1 overflow-y-auto max-h-64">
             { invites.isLoading &&
               <div className="flex flex-col items-center justify-between">
                 <span className="text-indigo-600 mx-auto pt-4">
@@ -49,7 +49,7 @@ export default function InviteDropdown() {
                 </span>
               </div>
             }
-            { !invites.isLoading && invites.data && invites.data.map(invite => {
+            { !invites.isLoading && invites.data && invites.data.map((invite, index) => {
               return (
                 <Menu.Item key={invite.id}>
                   {({ active }) => (
