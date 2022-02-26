@@ -18,13 +18,17 @@ import DeletePlanModal from "./DeletePlanModal";
 import DeleteExerciseFromPlanModal from "./DeleteExerciseFromPlanModal";
 import AddPatientDropdown from './AddPatientDropdown';
 import EditClientsModal from './EditClientsModal';
+import EditPlanRepetitionsDropdown from './EditPlanRepetitionsDropdown';
 
 export default function PlanView({ planId, setPlanId, setShowDirectory }) {
 
   const [addExerciseModalOpen, setAddExerciseModalOpen] = useState(false)
   const [editClientsModalOpen, setEditClientsModalOpen] = useState(false)
   const [deletePlanModalOpen, setDeletePlanModalOpen] = useState(false)
+  const [exerciseToDelete, setExerciseToDelete] = useState(null)
   const [deleteExerciseFromPlanModalOpen, setDeleteExerciseFromPlanModalOpen] = useState(false)
+
+  // Edit state
   const [editMode, setEditMode] = useState(null);
   const [editName, setEditName] = useState(null);
   const [editDuration, setEditDuration] = useState(null);
@@ -82,15 +86,15 @@ export default function PlanView({ planId, setPlanId, setShowDirectory }) {
           >{plan.data.name}</h1>
         }
         { editMode == "name" &&
-          <input
-            className="text-2xl font-bold text-gray-900 truncate border-0 border-b border-transparent focus:outline-none"
-            type="text"
-            value={editName}
-            onChange={(e) => setEditName(e.target.value)}
-            onKeyPress={handleKeyPress}
-            onBlur={handleUpdateName}
-            autoFocus={true}
-          />
+            <input
+              className="text-2xl font-bold text-gray-900 truncate border-1 border-b focus:outline-none"
+              type="text"
+              value={editName}
+              onChange={(e) => setEditName(e.target.value)}
+              onKeyPress={handleKeyPress}
+              onBlur={handleUpdateName}
+              autoFocus={true}
+            />
         }
         <button
           type="button"
@@ -109,7 +113,7 @@ export default function PlanView({ planId, setPlanId, setShowDirectory }) {
             </dt>
             <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 flex flex-row items-center justify-between">
               <div>
-                { plan.data.clients.map(_client => <img class="inline-block h-6 w-6 rounded-full ring-2 ring-white" src={_client.imgUrl} alt=""/>)}
+                { plan.data.clients.map(_client => <img key={_client.id} className="inline-block h-6 w-6 rounded-full ring-2 ring-white" src={_client.imageUrl} alt=""/>)}
                 <AddPatientDropdown planId={plan.data.id} />
               </div>
               <button
@@ -125,7 +129,7 @@ export default function PlanView({ planId, setPlanId, setShowDirectory }) {
               <CalendarIcon className="text-sm h-5 w-5 mr-2" />
               Frequency
             </dt>
-            <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 capitalize">{plan.data.repetitions}x {plan.data.timeframe?.toLowerCase()}</dd>
+            <EditPlanRepetitionsDropdown planId={plan.data.id}/>
           </div>
           <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
             <dt className="text-sm font-medium text-gray-500 inline-flex items-center">
@@ -205,14 +209,17 @@ export default function PlanView({ planId, setPlanId, setShowDirectory }) {
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-sm">
                         <button
                           type="button"
-                          className="inline-flex justify-center shadow-sm text-sm font-medium rounded-md bg-white"
+                          className="p-1"
                         >
                           <PencilIcon className="h-5 w-5 text-gray-500 hover:text-indigo-500" aria-hidden="true" />
                         </button>
                         <button
                           type="button"
-                          className="inline-flex justify-center shadow-sm text-sm font-medium rounded-md bg-white"
-                          onClick={() => setDeleteExerciseFromPlanModalOpen(true)}
+                          className="p-1"
+                          onClick={() => {
+                            setExerciseToDelete(exercise.id)
+                            setDeleteExerciseFromPlanModalOpen(true)
+                          }}
                         >
                           <TrashIcon className="ml-2 h-5 w-5 text-gray-500 hover:text-red-500" aria-hidden="true" />
                         </button>
@@ -227,7 +234,13 @@ export default function PlanView({ planId, setPlanId, setShowDirectory }) {
       </div>
       <AddExerciseModal open={addExerciseModalOpen} setOpen={setAddExerciseModalOpen} planId={planId} />
       <DeletePlanModal open={deletePlanModalOpen} setOpen={setDeletePlanModalOpen} plan={plan.data} setPlanId={setPlanId}/>
-      <DeleteExerciseFromPlanModal open={deleteExerciseFromPlanModalOpen} setOpen={setDeleteExerciseFromPlanModalOpen}/>
+      <DeleteExerciseFromPlanModal
+        open={deleteExerciseFromPlanModalOpen}
+        setOpen={setDeleteExerciseFromPlanModalOpen}
+        exerciseId={exerciseToDelete}
+        setExerciseToDelete={setExerciseToDelete}
+        planId={planId}
+      />
       <EditClientsModal open={editClientsModalOpen} setOpen={setEditClientsModalOpen} planId={planId} />
     </div>
   )

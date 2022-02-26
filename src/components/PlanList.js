@@ -54,7 +54,7 @@ export default function PlanList({ plans, setShowPlan, currentlySelected }) {
                     <p className="text-lg font-semibold text-gray-900">{plan.name}</p>
                     <div className="flex flex-row w-full justify-between items-center">
                       <div className="flex -space-x-1 overflow-hidden h-6">
-                        {plan.clients.map(_client => <img class="inline-block h-6 w-6 rounded-full ring-2 ring-white" src={_client.imgUrl} alt=""/>)}
+                        {plan.clients.map(_client => <img key={_client.id} className="inline-block h-6 w-6 rounded-full ring-2 ring-white" src={_client.imageUrl} alt=""/>)}
                       </div>
                       <div className="flex flex-row items-center">
                         <BicepSvg className="w-5 h-5 pr-1"/>

@@ -23,6 +23,7 @@ export default function EditClientsModal({ open, setOpen, planId }) {
       setClientsToAdd([])
       setClientsToRemove([])
       setOpen(false)
+      queryClient.invalidateQueries('plans')
       return queryClient.invalidateQueries(['plan', planId])
     },
   });
@@ -107,13 +108,15 @@ export default function EditClientsModal({ open, setOpen, planId }) {
                   <ul role="list" className="-my-5 divide-y divide-gray-200">
                     { plan && plan.data && clients && clients.data && clients.data.map((client) => (
                       <li key={client.id} className="py-4">
-                        <div className="flex items-center space-x-4">
-                          <div className="flex-shrink-0">
-                            <img className="h-8 w-8 rounded-full" src={client?.imageUrl} alt="" />
-                          </div>
-                          <div className="flex flex-col items-start">
-                            <p className="text-sm font-medium text-gray-900 truncate">{client.firstName} {client.lastName}</p>
-                            <p className="text-sm text-gray-500 truncate">{client.email}</p>
+                        <div className="flex items-center justify-between">
+                          <div className="flex flex-row items-center space-x-4">
+                            <div className="flex-shrink-0">
+                              <img className="h-8 w-8 rounded-full" src={client?.imageUrl} alt="" />
+                            </div>
+                            <div className="flex flex-col items-start">
+                              <p className="text-sm font-medium text-gray-900 truncate">{client.firstName} {client.lastName}</p>
+                              <p className="text-sm text-gray-500 truncate">{client.email}</p>
+                            </div>
                           </div>
                           <div>
                             { ((plan.data.clients.find(c => c.id === client.id)

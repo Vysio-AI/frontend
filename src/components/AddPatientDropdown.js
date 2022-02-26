@@ -24,12 +24,13 @@ export default function AddPatientDropdown({ planId }) {
 
   const addClientToPlan = useMutation(({ id, updateData }) => updatePlan(id, updateData), {
     onSuccess: () => {
+      queryClient.invalidateQueries('plans')
       return queryClient.invalidateQueries(['plan', planId])
     },
   });
 
   return (
-    <Menu as="div" className="relative inline-block text-left">
+    <Menu as="div" className="relative inline-block text-left z-40">
       <div>
         <Menu.Button className="flex-shrink-0 bg-white inline-block h-7 w-7 items-center justify-center rounded-full border-2 border-dashed border-gray-200 text-gray-400 hover:text-gray-500 hover:border-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
             <span className="sr-only">Add team member</span>
