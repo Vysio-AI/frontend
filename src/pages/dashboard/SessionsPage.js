@@ -8,6 +8,17 @@ import {
   AnnotationIcon,
 } from "@heroicons/react/solid";
 
+import { useQuery, useMutation, useQueryClient } from 'react-query';
+import { getSessions } from '../../api/sessions';
+import { getClients } from '../../api/clients';
+import { getPlans } from '../../api/plans';
+import { useEffect, useState } from "react";
+import { useHistory } from 'react-router-dom';
+
+// Momentjs
+import Moment from 'react-moment'
+import 'moment-timezone'
+
 const sessions = [
   {
     id: 1,
@@ -46,14 +57,14 @@ function SessionNotesAnnotation(props) {
 
   if (isNotes) {
     return (
-      <p className="mt-2 flex items-center text-sm text-gray-500">
+      <p className="mt-2 flex items-center text-sm text-gray-400">
         <AnnotationIcon className="flex-shrink-0 mr-1.5 h-5 w-5 text-indigo-500" aria-hidden="true" />
         Patient left notes
       </p>
     )
   } else {
     return (
-      <p className="mt-2 flex items-center text-sm text-gray-500">
+      <p className="mt-2 flex items-center text-sm text-gray-400">
         No patient notes
       </p>
     )
@@ -63,8 +74,31 @@ function SessionNotesAnnotation(props) {
 
 export default function SessionsPage() {
   const { isLoading } = useAuth0();
+  const history = useHistory();
+  const [plansObject, setPlansObject] = useState(null)
+  const [clientsObject, setClientsObject] = useState(null)
 
-  if (isLoading) {
+  const sessionsQuery = useQuery('sessions', () => getSessions())
+
+  const plansQuery = useQuery('plans', () => getPlans())
+
+  const clientsQuery = useQuery('clients', () => getClients())
+
+  useEffect(() => {
+    if (plansQuery.data) {
+      var object = plansQuery.data.reduce((obj, item) => (obj[item.id] = item, obj) ,{})
+      setPlansObject(object)
+    }
+  }, [plansQuery.data]);
+
+  useEffect(() => {
+    if (clientsQuery.data) {
+      var object = clientsQuery.data.reduce((obj, item) => (obj[item.id] = item, obj) ,{})
+      setClientsObject(object)
+    }
+  }, [clientsQuery.data]);
+
+  if (isLoading || sessionsQuery.isLoading || plansQuery.isLoading || clientsQuery.isLoading) {
     return <Loading />
   }
   
@@ -73,27 +107,32 @@ export default function SessionsPage() {
       <PageHeading title="Sessions" />
       <div className="bg-white shadow overflow-hidden sm:rounded-md">
         <ul className="divide-y divide-gray-200">
-          {sessions.map((session) => (
+          {sessionsQuery.data && clientsObject && plansObject && sessionsQuery.data.map((session) => (
             <li key={session.id}>
-              <a href="http://github.com" className="block hover:bg-gray-50">
+              <a 
+                className="block hover:bg-gray-50 hover:cursor-pointer"
+                onClick={() => {
+                  history.push(`/dashboard/sessions/${session.id}`)
+                }}
+              >
                 <div className="flex items-center px-4 py-4 sm:px-6">
                   <div className="min-w-0 flex-1 flex items-center">
                     <div className="flex-shrink-0">
-                      <img className="h-12 w-12 rounded-full" src={session.patient.imageUrl} alt="" />
+                      <img className="h-12 w-12 rounded-full" src={clientsObject[session.clientId]?.imageUrl} alt="" />
                     </div>
                     <div className="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
                       <div>
-                        <p className="text-sm font-medium text-black truncate">{session.patient.name}</p>
+                        <p className="text-base font-medium text-black truncate">{clientsObject[session.clientId]?.firstName} {clientsObject[session.clientId]?.lastName}</p>
                         <p className="mt-2 flex items-center text-sm text-gray-500">
-                          <span className="truncate">{session.plan.name}</span>
+                          <span className="truncate">{plansObject[session.planId]?.name}</span>
                         </p>
                       </div>
                       <div className="hidden md:block">
                         <div>
-                          <p className="text-sm text-gray-900">
-                            Completed on <time dateTime={session.date}>{session.dateFull}</time>
+                          <p className="text-base text-gray-400">
+                            <Moment format="DD/MM/YYYY HH:mm" trim>{session.endTime}</Moment>
                           </p>
-                          <SessionNotesAnnotation notes={session.notes} />
+                          <SessionNotesAnnotation notes={session?.clientNotes} />
                         </div>
                       </div>
                     </div>
@@ -106,7 +145,7 @@ export default function SessionsPage() {
             </li>
           ))}
         </ul>
-        <PaginationCardFooter/>
+        <PaginationCardFooter start={1} end={1} total={1} pageNum={1} pageCount={1}/>
       </div>
     </div>
   )

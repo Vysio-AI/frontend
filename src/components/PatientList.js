@@ -38,7 +38,7 @@ export default function PatientList({ patients, setShowPatient, currentlySelecte
           {patients && patients.map((patient) => (
             <li key={patient.id}>
               <div
-                className={`relative px-6 py-5 m-1 rounded-lg flex items-center space-x-3 hover:bg-gray-50 focus-within:ring-2 focus-within:ring-inset focus-within:ring-pink-500 ${patient.id == currentlySelected ? "border border-2 border-gray-400" : ""}`}
+                className={`relative px-6 py-5 m-2 rounded-lg flex items-center space-x-3 bg-slate-50 hover:bg-gray-100 shadow-lg outline outline-1 outline-gray-100 ${patient.id == currentlySelected ? "border-l-8 border-blue-400 ml-3 mr-1" : ""}`}
                 onClick={() => setShowPatient(patient.id)}
               >
                 <div className="flex-1 min-w-0">

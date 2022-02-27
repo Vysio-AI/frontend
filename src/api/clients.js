@@ -5,8 +5,8 @@ const getClient = (clientId) => {
     return getRequest(`/clients/${clientId}`);
 }
 
-const getClients = (limit, offset) => {
-    return getRequest(`/clients?limit=${limit}&offset=${offset}`);
+const getClients = () => {
+    return getRequest(`/clients`);
 }
 
 const updateClient = (clientId, updateData) => {

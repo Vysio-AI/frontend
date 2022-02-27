@@ -1,15 +1,16 @@
 // Module for interacting with the sessions API provided by api.vysio.ca
-import { getRequest, postRequest } from './http';
+import { getRequest, postRequest, patchRequest, delRequest } from './http';
 
 const getSession = (sessionId) => {
   return getRequest(`/sessions/${sessionId}`);
 }
 
-const getSessions = (clientId) => {
-  return getRequest(`/clients/${clientId}/sessions`);
+const getSessions = () => {
+  return getRequest(`/sessions`);
 }
 
 const updateSession = (sessionId, updateData) => {
+  console.log(updateData)
   return patchRequest(`/sessions/${sessionId}`, updateData);
 }
 

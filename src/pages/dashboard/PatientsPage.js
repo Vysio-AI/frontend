@@ -221,7 +221,7 @@ export default function PatientsPage() {
 
   const [invitePatientModalOpen, setInvitePatientModalOpen] = useState(false);
 
-  const clients = useQuery('clients', () => getClients(100, 0));
+  const clients = useQuery('clients', () => getClients());
 
   const setShowPatient = (patientId) => {
     setPatientId(patientId);

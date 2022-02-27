@@ -16,7 +16,7 @@ export default function EditClientsModal({ open, setOpen, planId }) {
 
   const plan = useQuery(['plan', planId], () => getPlan(planId));
 
-  const clients = useQuery('clients', () => getClients(100, 0));
+  const clients = useQuery('clients', () => getClients());
 
   const editPlan = useMutation(({ id, updateData }) => updatePlan(id, updateData), {
     onSuccess: () => {

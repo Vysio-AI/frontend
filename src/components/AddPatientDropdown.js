@@ -16,7 +16,7 @@ function classNames(...classes) {
 
 export default function AddPatientDropdown({ planId }) {
 
-  const clients = useQuery('clients', () => getClients(100, 0));
+  const clients = useQuery('clients', () => getClients());
 
   const plan = useQuery(['plan', planId], () => getPlan(planId));
 

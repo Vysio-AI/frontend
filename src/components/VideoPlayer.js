@@ -4,26 +4,31 @@ import ReactPlayer from 'react-player';
 import { getVideo } from '../api/videos';
 import { useQuery } from 'react-query';
 
-export default function VideoPlayer({ videoId }) {
+export default function VideoPlayer({ videoId, width, height }) {
 
   const video = useQuery(['video', videoId], () => getVideo(videoId));
 
-  if (video.isLoading) {
+  if (videoId && video.isLoading) {
     return <span>Loading...</span>
   }
 
-  if (video.isError) {
-    return <span>Error: {video.error.message}</span>
+  if (video.isError || !videoId) {
+    return (
+      <ReactPlayer
+        url={new MediaStream()}
+        controls={true}
+        width={width}
+        height={height}
+      />
+    )
   }
 
   return (
-    <div className="bg-white overflow-hidden shadow rounded-lg">
-      <div className="px-4 py-5 sm:p-6">
-        <ReactPlayer
-          url={video.data.readSignedUrl}
-          controls={true}
-        />
-      </div>
-    </div>
+    <ReactPlayer
+      url={video.data.readSignedUrl}
+      controls={true}
+      width={width}
+      height={height}
+    />
   )
 }
