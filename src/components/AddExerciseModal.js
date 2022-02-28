@@ -166,7 +166,7 @@ export default function AddExerciseModal({ open, setOpen, planId }) {
                         type="number"
                         name="length"
                         id="length"
-                        className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                        className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md p-2"
                         placeholder="30"
                         value={duration}
                         onChange={e => setDuration(parseInt(e.target.value))}
@@ -182,7 +182,7 @@ export default function AddExerciseModal({ open, setOpen, planId }) {
                         rows={4}
                         name="notes"
                         id="notes"
-                        className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                        className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md p-2"
                         value={notes}
                         onChange={e => setNotes(e.target.value)}
                       />
