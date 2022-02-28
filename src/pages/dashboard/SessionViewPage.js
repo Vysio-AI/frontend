@@ -16,6 +16,8 @@ import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import Moment from 'react-moment'
 import 'moment-timezone'
 
+const AUTO_SAVE_TIMER = 2000; // Time before autosave is triggered in ms
+
 export default function SessionViewPage() {
   const { sessionId } = useParams();
   const [width, setWidth] = useState(100);
@@ -77,7 +79,7 @@ export default function SessionViewPage() {
     }
     const timer = setTimeout(() => {
       setShouldAutoSave(true)
-    }, 3000);
+    }, AUTO_SAVE_TIMER);
     setAutoSaveTimer(timer)
   }
 
@@ -89,7 +91,7 @@ export default function SessionViewPage() {
     }
     const timer = setTimeout(() => {
       setShouldAutoSave(true)
-    }, 3000);
+    }, AUTO_SAVE_TIMER);
     setAutoSaveTimer(timer)
   }
 
@@ -132,7 +134,7 @@ export default function SessionViewPage() {
   }
 
   return (
-    <div className="flex flex-row h-screen w-full overflow-hidden">
+    <div className="flex flex-row h-full w-full overflow-hidden">
       <div className="flex flex-col justify-start w-3/5">
         <div className="flex flex-row items-center justify-start mx-2 my-2">
           <button
@@ -144,7 +146,7 @@ export default function SessionViewPage() {
         <div className="flex flex-row items-center justify-between mx-2 mb-10">
           <h1 className="text-3xl font-bold">{planQuery.data.name}</h1>
           <h1 className="text-2xl text-slate-400">
-            <Moment format="DD/MM/YYYY">{sessionQuery.data.endTime}</Moment>
+            <Moment format="MM/DD/YYYY">{sessionQuery.data.endTime}</Moment>
           </h1>
         </div>
         <VideoPlayer videoId={sessionQuery.data.videoId} width={width} height={height}/>

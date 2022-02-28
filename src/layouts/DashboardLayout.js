@@ -38,7 +38,7 @@ function isCurrent(href) {
   return href === window.location.pathname;
 }
 
-function DashboardLayout({ children }) {
+function DashboardLayout({ children, sidebar }) {
   const { user, isAuthenticated, isLoading, loginWithRedirect, logout } = useAuth0();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [newUserModalOpen, setNewUserModalOpen] = useState(false);
@@ -264,8 +264,8 @@ function DashboardLayout({ children }) {
             <MenuIcon className="h-6 w-6" aria-hidden="true" />
           </button>
         </div>
-        <main className="flex-1 relative z-0 focus:outline-none">
-          <div className="max-w-full px-4 sm:px-6 md:px-8 overflow-y-auto" id="dashboard-container">
+        <main className="flex-1 relative z-0 focus:outline-none bg-white">
+          <div className="w-full h-full overflow-y-auto" id="dashboard-container">
             {children}
           </div>
         </main>

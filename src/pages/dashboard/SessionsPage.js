@@ -104,7 +104,13 @@ export default function SessionsPage() {
   
   return (
     <div>
-      <PageHeading title="Sessions" />
+      <div className="bg-white px-4 py-5 border-b border-gray-200 sm:px-6">
+        <div className="-ml-4 -mt-2 flex items-center justify-between flex-wrap sm:flex-nowrap">
+          <div className="ml-4 mt-2">
+            <h1 className="text-3xl font-bold leading-6 text-gray-900">Sessions</h1>
+          </div>
+        </div>
+      </div>
       <div className="bg-white shadow overflow-hidden sm:rounded-md">
         <ul className="divide-y divide-gray-200">
           {sessionsQuery.data && clientsObject && plansObject && sessionsQuery.data.map((session) => (

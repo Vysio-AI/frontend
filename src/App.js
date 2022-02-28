@@ -11,7 +11,7 @@ import PublicLayout from './layouts/PublicLayout';
 
 // Page Imports
 import LandingPage from './pages/public/LandingPage';
-import HomePage from './pages/dashboard/HomePage';
+import DashboardPage from './pages/dashboard/DashboardPage';
 import PatientsPage from './pages/dashboard/PatientsPage';
 import PlansPage from './pages/dashboard/PlansPage';
 import SessionsPage from './pages/dashboard/SessionsPage';
@@ -32,6 +32,7 @@ function App() {
     "/dashboard",
     "/dashboard/patients",
     "/dashboard/plans",
+    "/dashboard/plans/:planId",
     "/dashboard/sessions/:sessionId",
     "/dashboard/sessions",
     "/dashboard/profile",
@@ -49,9 +50,9 @@ function App() {
       </Route>
       <Route exact path={dashboardRoutes}>
         <DashboardLayout>
-          <Route exact path="/dashboard" component={HomePage}></Route>
+          <Route exact path="/dashboard" component={DashboardPage}></Route>
           <Route exact path="/dashboard/patients" component={PatientsPage}></Route>
-          <Route exact path="/dashboard/plans" component={PlansPage}></Route>
+          <Route exact path="/dashboard/plans/:planId?" component={PlansPage}></Route>
           <Route exact path="/dashboard/sessions/:sessionId" component={SessionViewPage}></Route>
           <Route exact path="/dashboard/sessions" component={SessionsPage}></Route>
           <Route exact path="/dashboard/profile" component={ProfilePage}></Route>

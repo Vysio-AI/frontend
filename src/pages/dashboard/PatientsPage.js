@@ -238,7 +238,7 @@ export default function PatientsPage() {
     <div>
       <div className="bg-white px-4 py-5 border-b border-gray-200 sm:px-6">
         <div className="-ml-4 -mt-2 pl-2 pt-2 flex items-center justify-between flex-wrap sm:flex-nowrap">
-          <h1 className="text-2xl font-bold leading-6 text-gray-900">Patients</h1>
+          <h1 className="text-3xl font-bold leading-6 text-gray-900">Patients</h1>
           <div className="flex flex-row items-center">
             <InviteDropdown />
             <button
@@ -250,7 +250,7 @@ export default function PatientsPage() {
           </div>
         </div>
       </div>
-      <div className="relative h-screen flex overflow-hidden bg-white">
+      <div className="relative h-full flex overflow-hidden bg-white">
         <div className="flex flex-col min-w-0 flex-1 overflow-hidden">
           <div className="flex-1 relative z-0 flex overflow-hidden">
             {showDirectory &&

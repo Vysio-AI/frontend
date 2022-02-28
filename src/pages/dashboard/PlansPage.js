@@ -3,7 +3,8 @@ import Loading from "../../components/loading/Loading";
 import PlanList from "../../components/PlanList";
 import PlanView from "../../components/PlanView";
 import PageHeading from "../../components/PageHeading";
-import { useState } from 'react'
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from 'react'
 import { PlusCircleIcon } from '@heroicons/react/outline'
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { createPlan, getPlans } from '../../api/plans';
@@ -77,8 +78,9 @@ const directory = {
 
 export default function PlansPage() {
   const { isLoading } = useAuth0();
+  const { planId : paramPlanId } = useParams();
   const [showDirectory, setShowDirectory] = useState(true);
-  const [planId, setPlanId] = useState(null);
+  const [planId, setPlanId] = useState(paramPlanId);
 
   const queryClient = useQueryClient();
 
@@ -95,9 +97,17 @@ export default function PlansPage() {
     setShowDirectory(false);
   }
 
+  useEffect(() => {
+    if (planId !== null) {
+      setShowDirectory(false)
+    }
+  }, [])
+
   if (plans.isLoading || isLoading) {
     return <Loading />
   }
+
+  console.log(planId)
 
   console.log(plans.data)
 
@@ -105,7 +115,7 @@ export default function PlansPage() {
     <div>
       <div className="bg-white px-4 py-5 border-b border-gray-200 sm:px-6">
         <div className="-ml-4 -mt-2 pl-2 pt-2 flex items-center justify-between flex-wrap sm:flex-nowrap">
-          <h1 className="text-2xl font-bold leading-6 text-gray-900">Plans</h1>
+          <h1 className="text-3xl font-bold leading-6 text-gray-900">Plans</h1>
           <div className="flex flex-row">
             <button
               className="px-3 py-2 bg-blue-400 rounded-lg text-white font-semibold"
@@ -116,7 +126,7 @@ export default function PlansPage() {
           </div>
         </div>
       </div>
-      <div className="relative h-screen flex overflow-hidden bg-white">
+      <div className="relative h-full flex overflow-hidden bg-white">
         <div className="flex flex-col min-w-0 flex-1 overflow-hidden">
           <div className="flex-1 relative z-0 flex overflow-hidden">
             {showDirectory &&

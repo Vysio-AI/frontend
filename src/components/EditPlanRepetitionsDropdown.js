@@ -72,7 +72,7 @@ export default function AddPatientDropdown({ planId }) {
     >
       <div>
         <Menu.Button className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 capitalize">
-          {plan.data.repetitions}x {plan.data.timeframe?.toLowerCase()}
+          {plan.data?.repetitions}x {plan.data?.timeframe?.toLowerCase()}
         </Menu.Button>
       </div>
 

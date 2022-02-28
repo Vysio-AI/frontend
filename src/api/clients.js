@@ -17,9 +17,19 @@ const deleteClient = (clientId) => {
     return delRequest(`/clients/${clientId}`);
 }
 
+const getSessionsForClient = (clientId) => {
+    return getRequest(`/clients/${clientId}/sessions`)
+}
+
+const getPlansForClient = (clientId) => {
+    return getRequest(`/clients/${clientId}/plans`)
+}
+
 export {
     getClient,
     getClients,
     updateClient,
-    deleteClient
+    deleteClient,
+    getSessionsForClient,
+    getPlansForClient
 }
