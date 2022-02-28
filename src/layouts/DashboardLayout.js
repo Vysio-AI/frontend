@@ -24,18 +24,23 @@ import { useHistory } from "react-router-dom";
 import NewUserModal from "../components/NewUserModal";
 
 const navigation = [
-  { name: 'Dashboard', href: '/dashboard', icon: HomeIcon },
-  { name: 'Patients', href: '/dashboard/patients', icon: UsersIcon },
-  { name: 'Plans', href: '/dashboard/plans', icon: FolderIcon },
-  { name: 'Sessions', href: '/dashboard/sessions', icon: CalendarIcon },
+  { name: 'Dashboard', regex: '\/dashboard$', href: '/dashboard', icon: HomeIcon },
+  { name: 'Patients', regex: '\/dashboard\/patients', href: '/dashboard/patients', icon: UsersIcon },
+  { name: 'Plans', regex: '\/dashboard\/plans', href: '/dashboard/plans', icon: FolderIcon },
+  { name: 'Sessions', regex: '\/dashboard\/sessions', href: '/dashboard/sessions', icon: CalendarIcon },
 ]
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-function isCurrent(href) {
-  return href === window.location.pathname;
+function isCurrent(regex) {
+  const re = new RegExp(regex, 'i')
+  if (window.location.pathname.match(re)) {
+    return true
+  } else {
+    return false
+  }
 }
 
 function DashboardLayout({ children, sidebar }) {
@@ -143,7 +148,7 @@ function DashboardLayout({ children, sidebar }) {
                       key={item.name}
                       href={item.href}
                       className={classNames(
-                        item.current
+                        isCurrent(item.regex)
                           ? 'bg-gray-100 text-gray-900'
                           : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
                         'group flex items-center px-2 py-2 text-base font-medium rounded-md'
@@ -151,7 +156,7 @@ function DashboardLayout({ children, sidebar }) {
                     >
                       <item.icon
                         className={classNames(
-                          isCurrent(item.href) ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
+                          isCurrent(item.regex) ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
                           'mr-4 flex-shrink-0 h-6 w-6'
                         )}
                         aria-hidden="true"
@@ -211,13 +216,13 @@ function DashboardLayout({ children, sidebar }) {
                     key={item.name}
                     href={item.href}
                     className={classNames(
-                      isCurrent(item.href) ? 'bg-gray-100 text-gray-900' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
+                      isCurrent(item.regex) ? 'bg-gray-100 text-gray-900' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
                       'group flex items-center px-2 py-2 text-sm font-medium rounded-md'
                     )}
                   >
                     <item.icon
                       className={classNames(
-                        item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
+                        isCurrent(item.regex) ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
                         'mr-3 flex-shrink-0 h-6 w-6'
                       )}
                       aria-hidden="true"

@@ -49,7 +49,7 @@ export default function DashboardPage() {
           </div>
         </div>
       </div>
-      <div className="h-2/3 2xl:h-3/4 w-full flex flex-row p-4">
+      <div className="hidden h-2/3 2xl:h-3/4 w-full xl:flex xl:flex-row p-4">
         <div className="h-full w-3/5 flex flex-col">
           <div className="flex flex-row h-1/2 min-w-full">
             <div className="h-full w-1/2 p-4">
@@ -66,6 +66,26 @@ export default function DashboardPage() {
         <div className="min-h-full w-2/5 flex flex-col">
           <div className="h-full w-full p-4">
             <DailyCompletionCard currentClientId={currentClientId} />
+          </div>
+        </div>
+      </div>
+      <div className="h-full w-full flex flex-col p-4 xl:hidden">
+        <div className="w-full flex flex-row">
+          <div className="h-full w-full p-2">
+            <DailyCompletionCard currentClientId={currentClientId} />
+          </div>
+        </div>
+        <div className="w-full flex flex-row">
+          <div className="w-1/2 p-2">
+            <InformationCard currentClientId={currentClientId} />
+          </div>
+          <div className="w-1/2 p-2">
+            <PlansCard currentClientId={currentClientId} />
+          </div>
+        </div>
+        <div className="w-full flex flex-row">
+          <div className="h-full w-full p-2">
+            <SessionsCard currentClientId={currentClientId} />
           </div>
         </div>
       </div>
