@@ -2,79 +2,10 @@ import { useAuth0 } from "@auth0/auth0-react";
 import Loading from "../../components/loading/Loading";
 import PlanList from "../../components/PlanList";
 import PlanView from "../../components/PlanView";
-import PageHeading from "../../components/PageHeading";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from 'react'
-import { PlusCircleIcon } from '@heroicons/react/outline'
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { createPlan, getPlans } from '../../api/plans';
-
-const directory = {
-  S: [
-    {
-      id: 1,
-      name: 'Shoulder Rotation Routine',
-      patients: [
-        {
-          imgUrl: 'https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
-        },
-        {
-          imgUrl: 'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
-        }
-      ],
-      frequency: "2x Weekly",
-      exercises: [
-        {
-          id: 0,
-          name: "Shoulder Rotation",
-          focus_area: "Shoulder",
-          length: 5,
-          notes: "",
-        },
-        {
-          id: 1,
-          name: "Internal Rotation",
-          focus_area: "Shoulder",
-          length: 5,
-          notes: "",
-        },
-        {
-          id: 2,
-          name: "External Rotation",
-          focus_area: "Shoulder",
-          length: 5,
-          notes: "",
-        },
-      ],
-    },
-    {
-      id: 2,
-      name: 'Shoulder Strength Routine',
-      patients: [
-        {
-          imgUrl: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80'
-        },
-      ],
-      frequency: "7x Weekly",
-      exercises: [
-        {
-          id: 3,
-          name: "Trap Raises",
-          focus_area: "Shoulder",
-          length: 10,
-          notes: "",
-        },
-        {
-          id: 4,
-          name: "Upright Row",
-          focus_area: "Shoulder",
-          length: 10,
-          notes: "",
-        },
-      ],
-    },
-  ],
-}
 
 export default function PlansPage() {
   const { isLoading } = useAuth0();
@@ -98,10 +29,10 @@ export default function PlansPage() {
   }
 
   useEffect(() => {
-    if (planId !== null) {
+    if (planId) {
       setShowDirectory(false)
     }
-  }, [])
+  }, [planId])
 
   if (plans.isLoading || isLoading) {
     return <Loading />

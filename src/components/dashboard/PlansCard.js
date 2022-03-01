@@ -9,8 +9,6 @@ export default function PlansCard({ currentClientId }) {
 
   const plans = useQuery(['plans', currentClientId], () => getPlansForClient(currentClientId))
 
-  console.log(plans.data)
-
   return (
     <div className="h-full w-full bg-slate-50 rounded-xl shadow-lg outline outline-1 outline-gray-100 flex flex-col items-start justify-start p-4">
       <div className="flex flex-row w-full items-center justify-between">

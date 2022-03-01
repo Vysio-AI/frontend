@@ -44,11 +44,11 @@ export default function PlanList({ plans, setShowPlan, currentlySelected }) {
               className="px-1 py-0.5"
             >
               <div
-                className={`relative px-6 py-5 m-2 rounded-lg flex items-center space-x-3 bg-slate-50 hover:bg-gray-100 shadow-lg outline outline-1 outline-gray-100 ${plan.id == currentlySelected ? "border-l-8 border-blue-400 ml-3 mr-1" : ""}`}
+                className={`relative px-6 py-5 m-2 rounded-lg flex items-center space-x-3 bg-slate-50 hover:bg-gray-100 shadow-lg outline outline-1 outline-gray-100 ${plan.id === currentlySelected ? "border-l-8 border-blue-400 ml-3 mr-1" : ""}`}
                 onClick={() => setShowPlan(plan.id)}
               >
                 <div className="flex-1 min-w-0">
-                  <a href="#" className="focus:outline-none">
+                  <a href="" className="focus:outline-none">
                     {/* Extend touch target to entire panel */}
                     <span className="absolute inset-0" aria-hidden="true" />
                     <p className="text-lg font-semibold text-gray-900">{plan.name}</p>

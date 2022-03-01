@@ -24,10 +24,10 @@ import { useHistory } from "react-router-dom";
 import NewUserModal from "../components/NewUserModal";
 
 const navigation = [
-  { name: 'Dashboard', regex: '\/dashboard$', href: '/dashboard', icon: HomeIcon },
-  { name: 'Patients', regex: '\/dashboard\/patients', href: '/dashboard/patients', icon: UsersIcon },
-  { name: 'Plans', regex: '\/dashboard\/plans', href: '/dashboard/plans', icon: FolderIcon },
-  { name: 'Sessions', regex: '\/dashboard\/sessions', href: '/dashboard/sessions', icon: CalendarIcon },
+  { name: 'Dashboard', regex: '/dashboard$', href: '/dashboard', icon: HomeIcon },
+  { name: 'Patients', regex: '/dashboard/patients', href: '/dashboard/patients', icon: UsersIcon },
+  { name: 'Plans', regex: '/dashboard/plans', href: '/dashboard/plans', icon: FolderIcon },
+  { name: 'Sessions', regex: '/dashboard/sessions', href: '/dashboard/sessions', icon: CalendarIcon },
 ]
 
 function classNames(...classes) {
@@ -51,8 +51,9 @@ function DashboardLayout({ children, sidebar }) {
 
   const signupStatus = useQuery('signup-status', getSignupStatus);
 
+  console.log("loading")
+
   if (isLoading) {
-    console.log("Navlength: " + navigation.length);
     return <DashboardLoading navLength={navigation.length} />
   }
 
@@ -61,8 +62,6 @@ function DashboardLayout({ children, sidebar }) {
       redirectUri: window.location.origin + '/dashboard'
     })
   }
-
-  console.log(signupStatus);
 
   if (signupStatus.isLoading) {
     return <DashboardLoading navLength={navigation.length} />
@@ -74,17 +73,17 @@ function DashboardLayout({ children, sidebar }) {
   }
 
   // User has not been signed up previously
-  if (signupStatus.data.signedUp == false && !newUserModalOpen) {
+  if (signupStatus.data.signedUp === false && !newUserModalOpen) {
     setNewUserModalOpen(true);
   }
 
   // User has signed up previously as a client
-  if (signupStatus.data.signedUp && signupStatus.data.type == 'client') {
+  if (signupStatus.data.signedUp && signupStatus.data.type === 'client') {
     logout({ returnTo: window.location.origin });
     history.push("/");
   }
 
-  if (signupStatus.data.signedUp && signupStatus.data.type == 'practitioner' && newUserModalOpen) {
+  if (signupStatus.data.signedUp && signupStatus.data.type === 'practitioner' && newUserModalOpen) {
     setNewUserModalOpen(false);
   }
 
@@ -137,7 +136,8 @@ function DashboardLayout({ children, sidebar }) {
               <div className="flex-1 h-0 pt-5 pb-4 overflow-y-auto">
                 <div className="flex-shrink-0 flex items-center px-4">
                   <img
-                    className="h-10 w-auto"
+                    className="h-10 w-auto hover:cursor-pointer"
+                    onClick={() => history.push("/dashboard")}
                     src={logo}
                     alt="Vysio"
                   />
@@ -205,7 +205,8 @@ function DashboardLayout({ children, sidebar }) {
             <div className="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
               <div className="flex items-center flex-shrink-0 px-4">
                 <img
-                  className="h-10 w-auto"
+                  className="h-10 w-auto hover:cursor-pointer"
+                  onClick={() => history.push("/dashboard")}
                   src={logo}
                   alt="Vysio"
                 />

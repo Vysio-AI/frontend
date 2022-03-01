@@ -122,14 +122,14 @@ export default function SessionViewPage() {
         setIsSaved(true)
       }, 2000);
     }
-  }, [shouldAutoSave, sessionId])
+  }, [shouldAutoSave, sessionId, privateNotes, publicNotes, sessionMutation])
 
   // Clean up
   useEffect(() => {
     return () => {
       clearTimeout(autoSaveTimer)
     }
-  }, [])
+  }, [autoSaveTimer])
 
   if (sessionQuery.isLoading || clientQuery.isLoading || planQuery.isLoading) {
       return <div></div>
@@ -167,7 +167,7 @@ export default function SessionViewPage() {
             <h1 className="font-bold text-2xl">Routine</h1>
             <ul className="w-full">
               { planQuery.data.exercises.map((exercise, idx) => (
-                <li className="flex flex-row px-2 py-1 items-center justify-between w-full">
+                <li className="flex flex-row px-2 py-1 items-center justify-between w-full" key={exercise.id}>
                   <div>
                     {idx+1}. {exercise.activityType}
                   </div>

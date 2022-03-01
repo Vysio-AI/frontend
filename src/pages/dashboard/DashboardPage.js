@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
 import Loading from "../../components/loading/Loading";
-import VideoPlayer from '../../components/VideoPlayer';
 
 // Card components
 import DailyCompletionCard from '../../components/dashboard/DailyCompletionCard';
@@ -89,7 +88,7 @@ export default function DashboardPage() {
           </div>
         </div>
       </div>
-      <div className="h-full w-full flex flex-col p-4 md::hidden">
+      <div className="h-full w-full flex flex-col p-4 md:hidden">
         <div className="w-full flex flex-row">
           <div className="h-full w-full p-2">
             <DailyCompletionCard currentClientId={currentClientId} />
