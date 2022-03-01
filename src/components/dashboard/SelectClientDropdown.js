@@ -8,7 +8,6 @@ import {
 } from '@heroicons/react/outline'
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { getClients } from '../../api/clients';
-import { updatePlan, getPlan } from '../../api/plans';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -28,7 +27,7 @@ export default function SelectClientDropdown({ setCurrentClientId }) {
     <Menu as="div" className="relative inline-block text-left z-40">
       <div>
         <Menu.Button className="flex flex-row items-center">
-          <h1 className="text-3xl font-bold leading-6 text-gray-900 pl-4 pr-2 py-4">{currentClient?.firstName} {currentClient?.lastName}</h1>
+          <h1 className="text-lg lg:text-2xl xl:text-3xl font-bold leading-6 text-gray-900 pl-4 pr-2 py-4">{currentClient?.firstName} {currentClient?.lastName}</h1>
           <ChevronDownIcon className="h-9 w-9"/>
         </Menu.Button>
       </div>
@@ -62,7 +61,7 @@ export default function SelectClientDropdown({ setCurrentClientId }) {
                           className="text-gray-700 block px-4 py-2 text-sm flex flex-row items-center justify-between hover:bg-gray-100 hover:cursor-pointer"
                         >
                           <div className="flex flex-col items-left">
-                            <p className="font-semibold text-lg">{client.firstName} {client.lastName}</p>
+                            <p className="font-semibold text-base xl:text-lg">{client.firstName} {client.lastName}</p>
                           </div>
                           <CheckIcon className="w-5 h-5"/>
                         </a>
@@ -77,7 +76,7 @@ export default function SelectClientDropdown({ setCurrentClientId }) {
                           className="text-gray-700 block px-4 py-2 text-sm flex flex-row items-center justify-between hover:bg-gray-100 hover:cursor-pointer"
                         >
                           <div className="flex flex-col items-left">
-                            <p className="font-semibold text-lg">{client.firstName} {client.lastName}</p>
+                            <p className="font-semibold text-base xl:text-lg">{client.firstName} {client.lastName}</p>
                           </div>
                         </a>
                       )
