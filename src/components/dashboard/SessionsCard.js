@@ -28,9 +28,9 @@ export default function SessionsCard({ currentClientId }) {
   return (
     <div className="h-full w-full bg-slate-50 rounded-xl shadow-lg outline outline-1 outline-gray-100 flex flex-col items-start justify-start p-4">
       <div className="flex flex-row w-full items-center justify-between">
-        <h1 className="text-3xl font-semibold">Sessions</h1>
+        <h1 className="text-lg lg:text-xl xl:text-2xl 2xl:text-3xl font-semibold">Sessions</h1>
         <button
-          className="px-2 py-1 text-base bg-slate-200 rounded-full"
+          className="px-2 py-1 text-xs xl:text-sm 2xl:text-base bg-slate-200 rounded-lg"
           onClick={() => history.push("/dashboard/sessions")}
         >
           View All
@@ -46,13 +46,13 @@ export default function SessionsCard({ currentClientId }) {
                     {/* Extend touch target to entire panel */}
                     <span className="absolute inset-0" aria-hidden="true" />
                     <div className="flex flex-row items-center justify-between">
-                      <p className="text-xl font-semibold text-gray-900 pb-2">{plansObject[session.planId]?.name}</p>
-                      <Moment className="text-lg" duration={session.startTime} date={session.endTime} />
+                      <p className="text-base xl:text-lg 2xl:text-xl font-semibold text-gray-900 pb-2">{plansObject[session.planId]?.name}</p>
+                      <Moment className="text-sm xl:text-base 2xl:text-lg" duration={session.startTime} date={session.endTime} />
                     </div>
                     <div className="flex flex-row w-full justify-between items-center">
                       <div className="flex flex-row items-center">
-                        <CalendarIcon className="w-6 h-6 mr-2"/>
-                        <Moment className="text-lg" format="MM/DD/YYYY">{session.endTime}</Moment>
+                        <CalendarIcon className="w-4 h-4 xl:w-5 xl:h-5 2xl:w-6 2xl:h-6 mr-2"/>
+                        <Moment className="text-sm xl:text-base 2xl:text-lg" format="MM/DD/YYYY">{session.endTime}</Moment>
                       </div>
                     </div>
                   </a>

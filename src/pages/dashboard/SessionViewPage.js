@@ -5,6 +5,10 @@ import { getSession, updateSession } from '../../api/sessions';
 import { getClient } from '../../api/clients';
 import { getPlan } from '../../api/plans';
 
+import { useHistory } from 'react-router-dom';
+
+import { ChevronLeftIcon } from '@heroicons/react/solid'
+
 import VideoPlayer from "../../components/VideoPlayer";
 
 // Wsyiwyg editor
@@ -31,6 +35,8 @@ export default function SessionViewPage() {
   const [autoSaveTimer, setAutoSaveTimer] = useState(null)
   const [isAutoSaving, setIsAutoSaving] = useState(false)
   const [isSaved, setIsSaved] = useState(true)
+
+  const history = useHistory()
 
   // React query
   const queryClient = useQueryClient()
@@ -138,9 +144,11 @@ export default function SessionViewPage() {
       <div className="flex flex-col justify-start w-3/5">
         <div className="flex flex-row items-center justify-start mx-2 my-2">
           <button
-            className="text-lg text-slate-400"
+            className="text-lg text-slate-400 flex flex-row items-center"
+            onClick={() => history.push("/dashboard/sessions")}
           >
-            {`< ${clientQuery.data.firstName} ${clientQuery.data.lastName}`}
+            <ChevronLeftIcon className="w-6 h-6" />
+            <p className="font-semibold">Back</p>
           </button>
         </div>
         <div className="flex flex-row items-center justify-between mx-2 mb-10">
