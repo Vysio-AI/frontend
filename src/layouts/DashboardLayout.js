@@ -1,5 +1,5 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment, useState } from 'react'
+import { Fragment, useState, useEffect } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import {
   CalendarIcon,
@@ -47,9 +47,18 @@ function DashboardLayout({ children, sidebar }) {
   const { user, isAuthenticated, isLoading, loginWithRedirect, logout } = useAuth0();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [newUserModalOpen, setNewUserModalOpen] = useState(false);
+  const [currentPageName, setCurrentPageName] = useState(null);
   const history = useHistory();
 
   const signupStatus = useQuery('signup-status', getSignupStatus);
+
+  useEffect(() => {
+    navigation.forEach((page) => {
+      if (isCurrent(page.regex)) {
+        setCurrentPageName(page.name);
+      }
+    });
+  }, [window.location.pathname])
 
   if (isLoading) {
     console.log("Navlength: " + navigation.length);
@@ -148,7 +157,7 @@ function DashboardLayout({ children, sidebar }) {
                       key={item.name}
                       href={item.href}
                       className={classNames(
-                        isCurrent(item.regex)
+                        item.name == currentPageName
                           ? 'bg-gray-100 text-gray-900'
                           : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
                         'group flex items-center px-2 py-2 text-base font-medium rounded-md'
@@ -156,7 +165,7 @@ function DashboardLayout({ children, sidebar }) {
                     >
                       <item.icon
                         className={classNames(
-                          isCurrent(item.regex) ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
+                          item.name == currentPageName ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
                           'mr-4 flex-shrink-0 h-6 w-6'
                         )}
                         aria-hidden="true"
@@ -216,13 +225,13 @@ function DashboardLayout({ children, sidebar }) {
                     key={item.name}
                     href={item.href}
                     className={classNames(
-                      isCurrent(item.regex) ? 'bg-gray-100 text-gray-900' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
+                      item.name == currentPageName ? 'bg-gray-100 text-gray-900' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
                       'group flex items-center px-2 py-2 text-sm font-medium rounded-md'
                     )}
                   >
                     <item.icon
                       className={classNames(
-                        isCurrent(item.regex) ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
+                        item.name == currentPageName ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
                         'mr-3 flex-shrink-0 h-6 w-6'
                       )}
                       aria-hidden="true"

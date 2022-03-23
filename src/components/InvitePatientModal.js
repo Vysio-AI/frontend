@@ -115,7 +115,7 @@ export default function InvitePatientModal({ open, setOpen }) {
                         type="email"
                         name="email"
                         id="email"
-                        className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                        className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md p-2"
                         value={email}
                         onChange={e => setEmail(e.target.value)}
                       />
@@ -130,7 +130,7 @@ export default function InvitePatientModal({ open, setOpen }) {
                         type="text"
                         name="first-name"
                         id="first-name"
-                        className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                        className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md p-2"
                         value={firstName}
                         onChange={e => setFirstName(e.target.value)}
                       />
@@ -145,7 +145,7 @@ export default function InvitePatientModal({ open, setOpen }) {
                         type="text"
                         name="last-name"
                         id="last-name"
-                        className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                        className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md p-2"
                         value={lastName}
                         onChange={e => setLastName(e.target.value)}
                       />
