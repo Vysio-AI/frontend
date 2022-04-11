@@ -158,7 +158,7 @@ export default function PlanView({ planId, setPlanId, setShowDirectory }) {
           className="inline-flex justify-center text-sm font-medium rounded-md bg-white"
           onClick={() => setAddExerciseModalOpen(true)}
         >
-          <PlusCircleIcon className="h-5 w-5 text-indigo-600 hover:text-indigo-500" aria-hidden="true" />
+          <PlusCircleIcon className="h-5 w-5 text-blue-400 hover:text-blue-600" aria-hidden="true" />
         </button>
       </div>
       <div className="flex flex-col">

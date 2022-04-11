@@ -3,7 +3,8 @@ import Loading from "../../components/loading/Loading";
 import PatientList from "../../components/PatientList";
 import PatientView from "../../components/PatientView";
 import InvitePatientModal from "../../components/InvitePatientModal";
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { getClients } from '../../api/clients';
 import InviteDropdown from "../../components/InviteDropdown";
@@ -16,6 +17,15 @@ export default function PatientsPage() {
   const [invitePatientModalOpen, setInvitePatientModalOpen] = useState(false);
 
   const clients = useQuery('clients', () => getClients());
+
+  const history = useHistory();
+
+  useEffect(() => {
+    if (location?.state?.invitePatientModalOpen) {
+      setInvitePatientModalOpen(true);
+      history.replace();
+    }
+  }, [])
 
   const setShowPatient = (patientId) => {
     setPatientId(patientId);

@@ -104,7 +104,7 @@ export default function AddExerciseModal({ open, setOpen, planId }) {
                         <>
                           <Listbox.Label className="block text-sm font-medium text-gray-700">Select exercise</Listbox.Label>
                           <div className="mt-1 relative">
-                            <Listbox.Button className="bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                            <Listbox.Button className="bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-blue-400 focus:border-blue-400 sm:text-sm">
                               <span className="block truncate">{exerciseSelected.name}</span>
                               <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
                                 <SelectorIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
@@ -124,7 +124,7 @@ export default function AddExerciseModal({ open, setOpen, planId }) {
                                     key={exercise.id}
                                     className={({ active }) =>
                                       classNames(
-                                        active ? 'text-white bg-indigo-600' : 'text-gray-900',
+                                        active ? 'text-white bg-blue-400' : 'text-gray-900',
                                         'cursor-default select-none relative py-2 pl-3 pr-9'
                                       )
                                     }
@@ -139,7 +139,7 @@ export default function AddExerciseModal({ open, setOpen, planId }) {
                                         {selected ? (
                                           <span
                                             className={classNames(
-                                              active ? 'text-white' : 'text-indigo-600',
+                                              active ? 'text-white' : 'text-blue-400',
                                               'absolute inset-y-0 right-0 flex items-center pr-4'
                                             )}
                                           >
@@ -166,7 +166,7 @@ export default function AddExerciseModal({ open, setOpen, planId }) {
                         type="number"
                         name="length"
                         id="length"
-                        className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md p-2"
+                        className="shadow-sm focus:ring-blue-400 focus:border-blue-400 block w-full sm:text-sm border-gray-300 rounded-md p-2"
                         placeholder="30"
                         value={duration}
                         onChange={e => setDuration(parseInt(e.target.value))}
@@ -182,7 +182,7 @@ export default function AddExerciseModal({ open, setOpen, planId }) {
                         rows={4}
                         name="notes"
                         id="notes"
-                        className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md p-2"
+                        className="shadow-sm focus:ring-blue-400 focus:border-blue-400 block w-full sm:text-sm border-gray-300 rounded-md p-2"
                         value={notes}
                         onChange={e => setNotes(e.target.value)}
                       />
@@ -193,14 +193,14 @@ export default function AddExerciseModal({ open, setOpen, planId }) {
               <div className="mt-5 sm:mt-6 sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense">
                 <button
                   type="button"
-                  className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm"
+                  className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-400 text-base font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:col-start-2 sm:text-sm"
                   onClick={() => addExercise.mutate()}
                 >
                   Submit
                 </button>
                 <button
                   type="button"
-                  className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:col-start-1 sm:text-sm"
+                  className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-400 sm:mt-0 sm:col-start-1 sm:text-sm"
                   onClick={() => setOpen(false)}
                   ref={cancelButtonRef}
                 >
