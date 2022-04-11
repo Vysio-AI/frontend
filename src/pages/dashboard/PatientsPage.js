@@ -9,7 +9,7 @@ import { useQuery } from 'react-query';
 import { getClients } from '../../api/clients';
 import InviteDropdown from "../../components/InviteDropdown";
 
-export default function PatientsPage() {
+export default function PatientsPage({ location }) {
   const { isLoading } = useAuth0();
   const [showDirectory, setShowDirectory] = useState(true);
   const [patientId, setPatientId] = useState(null);

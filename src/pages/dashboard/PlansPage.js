@@ -38,10 +38,6 @@ export default function PlansPage() {
     return <Loading />
   }
 
-  console.log(planId)
-
-  console.log(plans.data)
-
   return (
     <div>
       <div className="bg-white px-4 py-5 border-b border-gray-200 sm:px-6">
