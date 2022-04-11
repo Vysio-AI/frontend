@@ -1,56 +1,20 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import Loading from "../../components/loading/Loading";
-import PageHeading from "../../components/PageHeading";
 import PaginationCardFooter from "../../components/PaginationCardFooter";
 import {
   ChevronRightIcon,
-  CheckCircleIcon,
   AnnotationIcon,
 } from "@heroicons/react/solid";
 
-import { useQuery, useMutation, useQueryClient } from 'react-query';
+import { useQuery } from 'react-query';
 import { getSessions } from '../../api/sessions';
 import { getClients } from '../../api/clients';
 import { getPlans } from '../../api/plans';
 import { useEffect, useState } from "react";
-import { useHistory } from 'react-router-dom';
 
 // Momentjs
 import Moment from 'react-moment'
 import 'moment-timezone'
-
-const sessions = [
-  {
-    id: 1,
-    patient: {
-      id: 1,
-      name: 'Lindsay Walton',
-      imageUrl: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80',
-    },
-    plan: {
-      id: 2,
-      name: 'Shoulder Mobility Training',
-    },
-    date: '2022-01-08',
-    dateFull: 'January 8, 2022',
-    notes: true,
-  },
-  {
-    id: 2,
-    patient: {
-      id: 1,
-      name: 'Lindsay Walton',
-      imageUrl: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80',
-    },
-    plan: {
-      id: 1,
-      name: 'Shoulder Strength Training',
-    },
-    date: '2022-01-07',
-    dateFull: 'January 7, 2022',
-    notes: false,
-  },
-]
 
 function SessionNotesAnnotation(props) {
   const isNotes = props.notes
@@ -74,7 +38,6 @@ function SessionNotesAnnotation(props) {
 
 export default function SessionsPage() {
   const { isLoading } = useAuth0();
-  const history = useHistory();
   const [plansObject, setPlansObject] = useState(null)
   const [clientsObject, setClientsObject] = useState(null)
 
@@ -86,14 +49,14 @@ export default function SessionsPage() {
 
   useEffect(() => {
     if (plansQuery.data) {
-      var object = plansQuery.data.reduce((obj, item) => (obj[item.id] = item, obj) ,{})
+      var object = plansQuery.data.reduce((obj, item) => (obj[item.id] = item, obj), {})
       setPlansObject(object)
     }
   }, [plansQuery.data]);
 
   useEffect(() => {
     if (clientsQuery.data) {
-      var object = clientsQuery.data.reduce((obj, item) => (obj[item.id] = item, obj) ,{})
+      var object = clientsQuery.data.reduce((obj, item) => (obj[item.id] = item, obj), {})
       setClientsObject(object)
     }
   }, [clientsQuery.data]);
@@ -117,9 +80,7 @@ export default function SessionsPage() {
             <li key={session.id}>
               <a 
                 className="block hover:bg-gray-50 hover:cursor-pointer"
-                onClick={() => {
-                  history.push(`/dashboard/sessions/${session.id}`)
-                }}
+                href={`/dashboard/sessions/${session.id}`}
               >
                 <div className="flex items-center px-4 py-4 sm:px-6">
                   <div className="min-w-0 flex-1 flex items-center">

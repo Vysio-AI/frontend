@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useAuth0 } from "@auth0/auth0-react";
 import Loading from "../../components/loading/Loading";
-import VideoPlayer from '../../components/VideoPlayer';
 
 // Card components
 import DailyCompletionCard from '../../components/dashboard/DailyCompletionCard';

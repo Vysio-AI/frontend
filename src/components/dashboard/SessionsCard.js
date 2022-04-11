@@ -23,8 +23,6 @@ export default function SessionsCard({ currentClientId }) {
     }
   }, [plans.data]);
 
-  console.log(plansObject)
-
   return (
     <div className="h-full w-full bg-slate-50 rounded-xl shadow-lg outline outline-1 outline-gray-100 flex flex-col items-start justify-start p-4">
       <div className="flex flex-row w-full items-center justify-between">
